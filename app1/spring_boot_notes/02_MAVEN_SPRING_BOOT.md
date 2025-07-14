@@ -102,7 +102,7 @@ located at the root level of your application directory structure.
 </project>
 ```
 
-## Project Coordinates = [groupId, artifactId, version]
+## Project Coordinates = [groupId, artifactId, version] = GAV
 
 Uniquely identify a project (just like cartesian coordinates)
 ```xml
@@ -118,5 +118,12 @@ domain name (com.apple)
 
 ```version``` = 1.0.SNAPSHOT (if the project is under active development)
 
+To add a dependency to the POM file, the version is *optional* but strongly
+recommended.
+
+### How to Find Dependency Coordinates?
+
+1. Visit the project page
+2. Visit (https://central.sonatype.com) (easiest approach)
 
 

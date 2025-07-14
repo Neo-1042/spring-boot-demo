@@ -12,7 +12,7 @@ Spring Boot uses Spring behind the scenes
 
 &#x2611; Minimizes the amount of manual configuration
 
-&#x2611; Performs auto-configuration based on properties-files and JAR classpath
+&#x2611; Performs autoconfiguration based on properties-files and JAR classpath
 
 &#x2611; Helps to resolve dependency conflicts (Maven or Gradle)
 
