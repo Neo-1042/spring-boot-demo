@@ -9,3 +9,13 @@ you have to manually restart your application.
 
 &#x2611; Simply add the dependency to your POM file
 
+
+
+**Note for IntelliJ:** you need to set 2 additional configurations for the Community Edition
+version:
+
+Preferences > Build, Execution, Deployment > Compiler > **Build Project Automatically**
+
+Preferences > Advanced Settings > **Allow auto-make to start**
+
+You're all set &#x2611;
