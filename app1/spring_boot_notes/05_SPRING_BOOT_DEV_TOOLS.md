@@ -7,8 +7,15 @@ you have to manually restart your application.
 
 &#x2611; Automatically restarts your application when code is updated
 
-&#x2611; Simply add the dependency to your POM file
+&#x2611; Simply add the dependency to your POM file:
 
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <!-- Automatically restarts your application when code is updated -->
+</dependency>
+```
 
 
 **Note for IntelliJ:** you need to set 2 additional configurations for the Community Edition
