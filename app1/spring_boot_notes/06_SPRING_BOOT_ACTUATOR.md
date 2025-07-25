@@ -69,3 +69,32 @@ management.endpoints.web.exposure.include=*
 
 ## Securing the Spring Boot Actuators 
 
+```xml
+<!-- Adding security to the actuators-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+
+Spring Security will prompt for login.
+
+Default username = 'user'
+
+Default password on the console logs.
+
+**Override default user name and password**
+
+File: src/main/resources/application.properties
+```properties
+spring.security.user.name=Rafa
+spring.security.user.password=tiger01
+```
+
+You can customize Spring Security for Spring Boot Actuator by linking to a
+database for roles and encrypted passwords.
+
+Exclude the ```/actuator/health``` endpoint.
+```properties
+management.endpoints.web.exposure.exclude=health
+```
