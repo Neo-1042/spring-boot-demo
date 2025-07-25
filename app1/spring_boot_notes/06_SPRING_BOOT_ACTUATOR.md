@@ -66,3 +66,6 @@ File: src/main/resources/application.properties
 # Use * to expose all endpoints
 management.endpoints.web.exposure.include=*
 ```
+
+## Securing the Spring Boot Actuators 
+

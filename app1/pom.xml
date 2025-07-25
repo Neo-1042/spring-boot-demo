@@ -52,7 +52,15 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 			<!-- App monitoring and health -->
 		</dependency>
+
+		<!-- Adding security to the actuators-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 	</dependencies>
+
+
 
 	<build>
 		<plugins>
