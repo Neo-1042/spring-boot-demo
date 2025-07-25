@@ -60,3 +60,9 @@ Displays the following JSON object:
 ```/actuator/beans``` => List of all beans registered in the Spring app context
 
 ```/actuator/mappings``` => List of all ```@RequestMapping``` paths.
+
+File: src/main/resources/application.properties
+```properties
+# Use * to expose all endpoints
+management.endpoints.web.exposure.include=*
+```
