@@ -1,15 +1,23 @@
 package com.neo_1042.springboot.demo.app1.rest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class FunRestController {
 
+	// Injecting properties
+	@Value("${iPad.color}")
+	private String iPadColor;
+
+	@Value("${iPhone.color}")
+	private String iPhoneColor;
+
 	// Expose a '/' endpoint that returns 'Hello, World'
 	@GetMapping("/")
 	public String sayHello() {
-		return "Hello, World from a RESTful controller";
+		return "Hello, World from a RESTful controller\n" + iPadColor;
 	}
 
 	// Expose a new endpoint for "workout"

@@ -56,32 +56,32 @@ java -jar target/app1-0.0.1-SNAPSHOT.jar # Run the app
 
 1. Verify Java installation:
 
-```bash
+```
 echo $JAVA_HOME
 java -version
 ```
 
 2. Move to the root location of your project, which contains the "mvnw.sh" file
 
-```bash
+```
 cd /Users/rafael1642/GIT/Projects/spring-boot-demo/app1
 ```
 
 3. Package your application using the Spring Boot plugin (no need to have
 the correct version of Maven installed)
 
-```bash
+```
 ./mvnw package # Downloads and runs Maven to generate the JAR
 ```
 
 4. Run the application with a good old **Java** command:
 
-```bash
+```
 java -jar target/app1-0.0.1-SNAPSHOT.jar 
 ```
 
 4.b Alternatively, run everything in one command:
 
-```bash
+```
 ./mvnw spring-boot:run
 ```
