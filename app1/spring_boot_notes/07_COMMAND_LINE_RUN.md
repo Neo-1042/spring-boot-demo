@@ -44,7 +44,7 @@ Recall that the Spring Initializr added the plugin:
 ```
 Which you can use to package executable JAR or WAR files.
 
-```bash
+```
 cd /path/to/spring-boot/project/app1
 ./mvnw package # This is the plugin working
 java -jar target/app1-0.0.1-SNAPSHOT.jar # Run the app

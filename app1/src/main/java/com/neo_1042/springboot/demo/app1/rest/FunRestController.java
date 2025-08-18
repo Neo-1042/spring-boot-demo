@@ -17,7 +17,7 @@ public class FunRestController {
 	// Expose a '/' endpoint that returns 'Hello, World'
 	@GetMapping("/")
 	public String sayHello() {
-		return "Hello, World from a RESTful controller\n" + iPadColor;
+		return "Hello, World from a RESTful controller";
 	}
 
 	// Expose a new endpoint for "workout"
@@ -29,5 +29,16 @@ public class FunRestController {
 	@GetMapping("/fortune")
 	public String getDailyFortune() {
 		return "Today is going to be very productive :D";
+	}
+
+	@GetMapping("/apple-info")
+	public String getAppleInfo() {
+		StringBuilder strApple = new StringBuilder("I have a ");
+		strApple.append(iPadColor);
+		strApple.append(" iPad and a ");
+		strApple.append(iPhoneColor);
+		strApple.append(" iPhone.");
+
+		return strApple.toString();
 	}
 }
