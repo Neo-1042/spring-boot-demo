@@ -62,7 +62,7 @@ server.port=7070
 server.servlet.context-path=/my-silly-app
 
 # Default HTTP session time out
-server.servlet.session.timetout=15m # 15 minutes
+server.servlet.session.timeout=15m # 15 minutes
 
 ```
 

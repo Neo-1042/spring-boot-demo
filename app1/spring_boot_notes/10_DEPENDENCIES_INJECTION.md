@@ -23,7 +23,84 @@ have 2 primary functions:
 
 We want to inject this dependency (Coach) into our DemoController.
 
-## Injection Types
+## Injection Types. Two recommended types
 
 1. Constructor Injection
+
+First choice (recommended by spring.io).
+Use this when you have **required dependencies**
+
 2. Setter Injection
+
+Use this when you have **optional dependencies**. So, in this case, if the
+dependency is not provided, your app can provide reasonable default logic.
+
+## Spring Autowiring
+
+For dependency injection, Spring can use autowiring to look for a class that
+matches by class name or interface name. Spring will automatically inject it.
+So, Spring will scan for ```@Components``` and ask "Does anyone here
+implement the Coach interface?" If so, let's inject them.
+
+### Example application. Constructor Injection
+
+1. Define the dependency interface and class
+2. Create DEMO REST Controller
+3. Create a **constructor** in your class for injections
+4. Add ```@GetMapping``` for the endpoint
+
++ Coach.java
+```java
+package com.neo_1042.springboot.demo.app1;
+
+public interface Coach {
+	
+	String getDailyWorkout();
+}
+```
+
++ CricketCoach.java
+```java
+package com.neo_1042.springboot.demo.app1;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class CricketCoach implements Coach {
+	
+	@Override
+    public String getDailyWorkout() {
+		return "Gym practice 16 times a month";
+    }
+}
+```
+
+The ```@Component``` annotation marks the class as a **Spring Bean** and makes
+it a candidate for the Spring injection.
+A **Spring Bean** is just a regular Java class that is managed by Spring.
+
++ DemoController.java
+```java
+package com.neo_1042.springboot.demo.app1;
+
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@RestController
+public class DemoController {
+	
+	private Coach myCoach;
+	
+	@Autowired
+    public DemoController(Coach theCoach) {
+		myCoach = theCoach;
+    }
+	
+	@GetMapping("/dailyworkout")
+    public String getDailyWorkout() {
+		return myCoach.getDailyWorkout();
+    }
+    
+}
+```
