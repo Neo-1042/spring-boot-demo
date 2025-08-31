@@ -104,3 +104,34 @@ public class DemoController {
     
 }
 ```
+
+### How Spring Processes your app? Behind the scenes.
+
+- File: Coach.java (interface)
+- File: CricketCoach.java (implementation)
+- File: DemoController.java (REST endpoint)
+
+With these files, the Spring framework will handle the constructor
+injection like this:
+
+```java
+// The type of the Spring Bean is actually the type of the INTERFACE
+Coach theCoach = new CricketCoach();
+
+// 'theCoach' is INJECTED into the DemoController instance
+// via its constructor
+// Coach theCoach is a HELPER for the actual controller.
+DemoController demoController = new DemoController(theCoach);
+```
+
+However, Spring is much more than **Inversion of Control** and
+**Dependency Injection**.
+
+Spring is targeted for enterprise 'real-world' applications.
+Spring provides key features such as:
+
+- Database access and transactions
+- Rest APIs and Web MVC
+- Security
+
+END_OF_FILE

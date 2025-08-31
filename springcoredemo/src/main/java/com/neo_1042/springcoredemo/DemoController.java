@@ -27,6 +27,7 @@ public class DemoController {
 		myCoach = theCoach;
 	}
 
+	// We are delegating the work of the endpoint to the Spring Bean (myCoach)
 	@GetMapping("/dailyworkout")
 	public String getDailyWorkout() {
 
