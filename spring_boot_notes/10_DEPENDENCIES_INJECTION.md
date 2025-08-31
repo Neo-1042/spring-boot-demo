@@ -134,4 +134,26 @@ Spring provides key features such as:
 - Rest APIs and Web MVC
 - Security
 
-END_OF_FILE
+# Setter Injection
+
+Inject dependencies by calling setter methods on your class.
+We'll take a look into an _Autowiring_ example:
+
+1. Inject a Coach implementation
+2. Spring will scan for @Component (s)
+3. Does any one implement the Coach interface?
+4. If so, let's inject them!
+
+File: DemoController.java
+```java
+@RestController
+public class DemoController {
+
+	private Coach myCoach;
+
+	@Autowired
+	public void setCoach(Coach theCoach) {
+		myCoach = theCoach;
+	}
+}
+```

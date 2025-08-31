@@ -1,5 +1,6 @@
-package com.neo_1042.springcoredemo;
+package com.neo_1042.springcoredemo.rest;
 
+import com.neo_1042.springcoredemo.common.Coach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
