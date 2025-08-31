@@ -12,26 +12,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 * 3] Create a controller to demo this endpoint, named "DemoController"
 *
 * The @Autowired annotation tells Spring to inject a dependency
-* If you only have one constructor, then @Autowired on constructor is optional (but recommended)
+* REMINDER: setter injection is used when you have optional dependencies
 */
 
 @RestController
 public class DemoController {
 
-	// Define a private field for the dependency (Spring Bean)
+	// Define a private field for the dependency
 	private Coach myCoach;
 
-	// Define a constructor for dependency injection
 	@Autowired
-	public DemoController(Coach theCoach) {
-
+	public void setCoach(Coach theCoach) {
 		myCoach = theCoach;
 	}
 
-	// We are delegating the work of the endpoint to the Spring Bean (myCoach)
 	@GetMapping("/dailyworkout")
 	public String getDailyWorkout() {
 
 		return myCoach.getDailyWorkout();
 	}
+
 }

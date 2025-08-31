@@ -10,6 +10,6 @@ public class CricketCoach implements Coach {
 	@Override
 	public String getDailyWorkout() {
 
-		return "DISCIPLINE AND TECHNIQUE WILL GRANT YOU TRUE HAPPINESS";
+		return "DISCIPLINE AND TECHNIQUE WILL GRANT YOU TRUE HAPPINESS :D";
 	}
 }

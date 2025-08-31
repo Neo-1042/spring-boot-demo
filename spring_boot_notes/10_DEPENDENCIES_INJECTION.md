@@ -157,3 +157,35 @@ public class DemoController {
 	}
 }
 ```
+
+### Setter Injection. Behind the scenes
+
+**The Spring framework** will:
+
+```java
+Coach theCoach = new CricketCoach();
+
+DemoController demoController = new DemoController();
+
+// SETTER INJECTION
+demoController.setCoach(theCoach);
+```
+
+We can also inject dependencies by calling **ANY** method on our
+class. Simply give @Autowired:
+
+```java
+@Autowired
+public void doSomeStuff(Coach theCoach) {
+	myCoach = theCoach;
+}
+```
+
+### Reminder of usages:
+
+1. Constructor Injection => Required dependencies, recommended by
+spring.io.
+
+2. Setter Injection => Optional dependencies.
+If the dependency is not provided, your app can provide reasonable
+default logic.
