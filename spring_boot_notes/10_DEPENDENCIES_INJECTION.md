@@ -183,9 +183,47 @@ public void doSomeStuff(Coach theCoach) {
 
 ### Reminder of usages:
 
-1. Constructor Injection => Required dependencies, recommended by
+1. **Constructor Injection** => Required dependencies, recommended by
 spring.io.
 
-2. Setter Injection => Optional dependencies.
+2. **Setter Injection** => Optional dependencies.
 If the dependency is not provided, your app can provide reasonable
 default logic.
+
+## FIELD INJECTION (*Not recommended)
+
+**Not recommended by the spring.io dev team** 
+
+Field injection used to be popular on Spring projects, but it has
+fallen out of favor because it makes the code harder to 
+**unit test**.
+
+However, you will still see it in legacy projects and old books.
+
+**FIELD INJECTION** => Inject dependencies by setting field values
+on your class directly (even private fields), accomplished by using
+_Java Reflection_.
+
+File: DemoController.java
+
+```java
+package com.neo_1042.springcoredemo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+@RestController
+public class DemoController {
+
+	// Field injection demo
+	@Autowired
+	private Coach myCoach;
+
+	// No need for constructors or setters
+	// Not recommended, but you may still encounter it
+
+	@GetMapping("/dailyworkout")
+	public String getDailyWorkout() {
+		return myCoach.getDailyWorkout();
+	}
+}
+```
