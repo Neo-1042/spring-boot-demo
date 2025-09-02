@@ -15,4 +15,21 @@ tennisCoach</br>
 trackCoach
 </span>
 
-Solution: be specific! Use the ```@Qualifier``` annotation.
+Solution: be specific! Use the ```@Qualifier``` annotation with
+the bean id (same name as the class, camelCase)
+
+File: DemoController.java. CONSTRUCTOR INJECTION.
+```java
+    @Autowired
+    public DemoController(@Qualifier("tennisCoach") Coach theCoach) {
+        myCoach = theCoach;
+    }
+```
+
+File: DemoController.java. SETTER INJECTION.
+```java
+    @Autowired
+    public void setCoach(@Qualifier("cricketCoach") Coach theCoach) {
+        myCoach = theCoach;
+    }
+```

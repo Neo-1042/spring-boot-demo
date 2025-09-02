@@ -2,6 +2,7 @@ package com.neo_1042.springcoredemo.rest;
 
 import com.neo_1042.springcoredemo.common.Coach;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -21,8 +22,9 @@ public class DemoController {
 	// Define a private field for the dependency
 	private Coach myCoach;
 
+	// Go back to CONSTRUCTOR INJECTION
 	@Autowired
-	public void setCoach(Coach theCoach) {
+	public void DemoController(@Qualifier("trackCoach") Coach theCoach) {
 		myCoach = theCoach;
 	}
 
