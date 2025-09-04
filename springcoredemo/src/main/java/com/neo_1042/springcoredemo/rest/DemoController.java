@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RestController
 public class DemoController {
 
-	// Define a private field for the dependency
+	// Define a private field for the dependency to be injected
 	private Coach myCoach;
 
-	// Go back to CONSTRUCTOR INJECTION
+
 	@Autowired
-	public void DemoController(@Qualifier("trackCoach") Coach theCoach) {
+	public void DemoController(Coach theCoach) {
 		myCoach = theCoach;
 	}
 

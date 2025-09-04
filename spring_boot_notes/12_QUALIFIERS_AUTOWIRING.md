@@ -33,3 +33,36 @@ File: DemoController.java. SETTER INJECTION.
         myCoach = theCoach;
     }
 ```
+
+## @Primary Annotation (No need for @Qualifier)
+
+"I simply need a coach, I don't care which one"
+
+Add only one ```@Primary``` to the desired implementation.
+
+File: TrackCoach.java
+```java
+@Component
+@Primary
+public class TrackCoach implements Coach {
+
+    @Override
+    public String getDailyWorkout() {
+
+        return "USAIN BOLT IS THE BEST";
+    }
+}
+```
+
+When you add the ```@Primary``` annotation to one of the multiple
+implementations, you should remove the ```@Qualifier``` annotation
+in the DemoController.java file.
+
+## Which one: @Primary or @Qualifier?
+
+```@Primary``` leaves up to the implementation classes. Choose this
+if you want one implementation class to be chosen as default.
+(You can add a @Qualifier to override the @Primary annotation)
+
+```@Qualifier``` is specific on which bean you want (Recommended)
+
