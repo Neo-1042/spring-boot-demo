@@ -1,5 +1,6 @@
 package com.neo_1042.springcoredemo.common;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
@@ -8,9 +9,16 @@ import org.springframework.stereotype.Component;
 
 // Reminder: @Qualifier (DemoController.java) has precedence over @Primary
 // You can NOT have more than one @Primary annotation
+
+// @Lazy -> The bean will only be initilized if needed for dependency injection
 @Component
-@Primary
-public class TrackCoach implements Coach{
+@Lazy
+public class TrackCoach implements Coach {
+
+
+	public TrackCoach() {
+		System.out.println("In constructor: " + getClass().getSimpleName());
+	}
 
 	@Override
 	public String getDailyWorkout() {

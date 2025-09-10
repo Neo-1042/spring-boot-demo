@@ -64,5 +64,5 @@ in the DemoController.java file.
 if you want one implementation class to be chosen as default.
 (You can add a @Qualifier to override the @Primary annotation)
 
-```@Qualifier``` is specific on which bean you want (Recommended)
+```@Qualifier``` is specific on which bean you want (Recommended) &#x2611;
 
