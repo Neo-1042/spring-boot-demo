@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 // @Lazy -> The bean will only be initilized if needed for dependency injection
 @Component
-@Lazy
 public class TrackCoach implements Coach {
 
 
