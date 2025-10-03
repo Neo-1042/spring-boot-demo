@@ -25,12 +25,12 @@ We want to inject this dependency (Coach) into our DemoController.
 
 ## Injection Types. Two recommended types
 
-1. Constructor Injection
+1. **Constructor Injection**
 
 First choice (recommended by spring.io).
 Use this when you have **required dependencies**
 
-2. Setter Injection
+2. **Setter Injection**
 
 Use this when you have **optional dependencies**. So, in this case, if the
 dependency is not provided, your app can provide reasonable default logic.
