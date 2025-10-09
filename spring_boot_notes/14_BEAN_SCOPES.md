@@ -103,3 +103,49 @@ public class DemoController {
     }
 }
 ```
+
+## Bean Lifecycle Methods/Hooks. Annotations
+
+### Bean Lifecycle:
+
+Container Started --> Bean Instantiated --> Dependencies
+Injected --> Internal Spring Processing 
+    --> Your Custom Initialization Method
+
+----> The Bean is ready for use
+
+When the container is shutdown, you have your Custom
+Destroy Method.
+
+- You can add custom code during **bean initialization**
+or **bean destruction**, such as:
+
+1. Calling custom business logic
+2. Setting up handles to resources (DB, sockets, files, etc.)
+3. Clean up work (Close DB connections, sockets, files, etc.)
+
+File: CricketCoach.java
+```java
+@Component
+public class CricketCoach implements Coach {
+
+    public CricketCoach() {
+        System.out.println("In constructor: " + getClass().getSimpleName());
+    }
+
+    @PostConstruct
+    public void doMyStartupStuff() {
+        System.out.println("Initializing CricketCoach");
+        System.out.println("Firing engines ... ");
+        System.out.println(getClass().getSimpleName());
+    }
+
+    @PreDestroy
+    public void doMyCleanupStuff() {
+        System.out.println("About to shut down");
+        System.out.println(" ... ");
+        System.out.println(getClass().getSimpleName());
+    }
+
+}
+```
