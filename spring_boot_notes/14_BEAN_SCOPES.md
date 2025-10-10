@@ -104,6 +104,16 @@ public class DemoController {
 }
 ```
 
+\* NOTE about **SCOPE_PROTOTYPE**: Spring does not call the
+destroy method. The container instantiates, configures and
+otherwise assembles a prototype object, and then hands it
+to the client, with no further record of that prototype
+instance. 
+
+The client's code must clean up prototyped-scoped objects
+and release expensive resources that the prototype bean(s)
+are holding. 
+
 ## Bean Lifecycle Methods/Hooks. Annotations
 
 ### Bean Lifecycle:
