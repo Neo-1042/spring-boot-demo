@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 /*
 * Review of steps for creating a REST endpoint with Spring Boot
 * 1] Create the "Coach" interface
-* 2] Create the implementation of "Coach", named "CricketCoach" => Spring Bean
+* 2] Create the implementation(s) of "Coach", (e.g.) named "CricketCoach" => Spring Bean
 * 3] Create a controller to demo this endpoint, named "DemoController"
+* 4] Inject the new Coach implementation in DemoController
 *
 * The @Autowired annotation tells Spring to inject a dependency
 * REMINDER: setter injection is used when you have optional dependencies
@@ -28,7 +29,7 @@ public class DemoController {
 	// Update the constructor to INJECT another Coach
 	@Autowired
 	public void DemoController(
-			@Qualifier("cricketCoach") Coach theCoach
+			@Qualifier("swimCoach") Coach theCoach
 			//,@Qualifier("cricketCoach") Coach theAnotherCoach
 	) {
 		System.out.println("In constructor: " + getClass().getSimpleName());

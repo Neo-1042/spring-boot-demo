@@ -21,6 +21,8 @@ public class CricketCoach implements Coach {
 		System.out.println("In constructor: " + getClass().getSimpleName());
 	}
 
+	/*
+	// Commented this out for moving on to Java Config Bean
 	// Define custom init method
 	@PostConstruct
 	public void doMyStartupStuff() {
@@ -28,12 +30,15 @@ public class CricketCoach implements Coach {
 		System.out.println("Firing engines ... ");
 		System.out.println(getClass().getSimpleName());
 	}
+	*/
 
 	@Override
 	public String getDailyWorkout() {
 		return "DISCIPLINE AND TECHNIQUE WILL GRANT YOU TRUE HAPPINESS.";
 	}
 
+	/*
+	// Commented this out for moving on to Java Config Bean
 	// Define custom destroy method
 	@PreDestroy
 	public void doMyCleanupStuff() {
@@ -41,4 +46,5 @@ public class CricketCoach implements Coach {
 		System.out.println(" ... ");
 		System.out.println(getClass().getSimpleName());
 	}
+	 */
 }
