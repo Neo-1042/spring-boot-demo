@@ -37,7 +37,7 @@ Spring Boot can be configured in the ```application.properties``` file:
 Server port, context path, actuator, security. 
 Spring Boot has over 1000+ properties:
 
-(www.luv2code.com/spring-boot-props) 
+[www.luv2code.com/spring-boot-props](www.luv2code.com/spring-boot-props)
 
 ### Categories of Spring Boot Properties
 
