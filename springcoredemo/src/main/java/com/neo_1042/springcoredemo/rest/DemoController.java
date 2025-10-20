@@ -29,7 +29,7 @@ public class DemoController {
 	// Update the constructor to INJECT another Coach
 	@Autowired
 	public void DemoController(
-			@Qualifier("swimCoach") Coach theCoach
+			@Qualifier("aquatic") Coach theCoach
 			//,@Qualifier("cricketCoach") Coach theAnotherCoach
 	) {
 		System.out.println("In constructor: " + getClass().getSimpleName());
