@@ -38,3 +38,34 @@ sudo /usr/local/mysql/support-files/mysql.server stop
 /usr/local/mysql/bin/mysql -u root -p
 # Enter root password for MySQL
 ```
+
+# Workspace SQL scripts
+
+- 01-create-user.sql
+
+userid = password = **springstudent**
+
+- 02-student-tracker.sql
+
+Creates the starter DB table.
+
+## Running scripts using MySQL's console
+
+```bash
+# Start the MySQL server
+sudo /usr/local/mysql/support-files/mysql.server start
+sudo /usr/local/mysql/support-files/mysql.server status
+
+# Access the database shell:
+/usr/local/mysql/bin/mysql -u root -p
+# Enter root password
+
+mysql> source /path/to/your/script.sql;
+mysql> source /Users/rafael1642/GIT/Projects/spring-boot-demo/hibernate_jpa_crud_spring_boot/sql_scripts/00-starter-sql-scripts/01-create-user.sql
+
+```
+
+Running this first script creates the user 'springstudent'
+with the 'root' user first. 
+
+This user originally has only schema = "sys". 

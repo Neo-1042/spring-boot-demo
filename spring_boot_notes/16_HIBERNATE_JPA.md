@@ -67,8 +67,8 @@ System.out.println("Retrieved student: " + myStudent);
 ## Querying for Java Objects
 
 ```java
-TypedQuery<Student> theQuery = entityManager.createQuery(
-    "from Student", Student.class
+TypedQuery<Student> studentList = entityManager.createQuery(
+    " from Student", Student.class
 );
 
 List<Student> listStudents = theQuery.getResultList();
