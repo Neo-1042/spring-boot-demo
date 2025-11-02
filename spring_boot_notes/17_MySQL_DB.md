@@ -47,7 +47,7 @@ userid = password = **springstudent**
 
 - 02-student-tracker.sql
 
-Creates the starter DB table.
+Creates the schema and the STUDENT DB table.
 
 ## Running scripts using MySQL's console
 
@@ -69,3 +69,10 @@ Running this first script creates the user 'springstudent'
 with the 'root' user first. 
 
 This user originally has only schema = "sys". 
+
+File: 02-student-tracker.sql will create the schema named
+**'student_tracker'**
+```sql
+CREATE DATABASE IF NOT EXISTS `student_tracker`;
+USE `student_tracker`;
+```
