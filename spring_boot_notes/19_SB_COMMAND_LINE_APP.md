@@ -24,3 +24,13 @@ public class CrudDemoApplication {
     }
 }
 ```
+
+### Turning off the Spring Banner (Logo) and Reducing Logging Level
+
+file: application.properties
+```properties
+# Turn off Spring banner
+spring.main.banner-mode=off
+# Reduce the logging level
+logging.level.root=warn
+```
