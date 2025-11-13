@@ -91,3 +91,15 @@ public class Student {
 **org.hibernate.id.IdentifierGenerator**
 
 2. Override the ```public Serializable generate()``` method.
+
+## Entity Class (review)
+
+At minimum, the entity classes, that is, the Java classes
+that are directly mapped to a database table, must:
+
+### 1. Annotated with @Entity
+### 2. Have a public or protected no-arg constructor
+
+The class is allowed to have other constructors. But if
+you add any other, Java will not provide a default
+no-arg constructor.
