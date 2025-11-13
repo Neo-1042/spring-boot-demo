@@ -81,4 +81,13 @@ public class Student {
 | :---:         |     ---     |
 | GenerationType.AUTO | Pick an appropriate strategy for the particular DB |
 | GenerationType.IDENTITY |  Assign primary keys using DB identity column |
-| GenerationType.SEQUENCE | Assign primary keys using a DB sequence | 
+| GenerationType.SEQUENCE | Assign PKs using a DB sequence | 
+| GenerationType.TABLE | Assign PKs using an underlying DB table to ensure uniqueness |
+| GenerationType.UUID |  Assign PKs using a globally unique identifier (UUID) to ensure uniqueness |
+
+### Define your own custom generation strategy
+
+1. Create an implementation of 
+**org.hibernate.id.IdentifierGenerator**
+
+2. Override the ```public Serializable generate()``` method.
