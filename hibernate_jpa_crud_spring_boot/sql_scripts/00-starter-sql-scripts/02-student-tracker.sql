@@ -15,3 +15,10 @@ CREATE TABLE `student` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+-- To DELETE (clean) the table, run:
+DELETE FROM student_tracker.student;
+COMMIT;
+ALTER TABLE student_tracker.student AUTO_INCREMENT = 1;
+
+-- Or better:
+TRUNCATE TABLE student_tracker.student;
