@@ -76,3 +76,15 @@ File: 02-student-tracker.sql will create the schema named
 CREATE DATABASE IF NOT EXISTS `student_tracker`;
 USE `student_tracker`;
 ```
+
+# Change the starting point of AUTO_INCREMENT
+
+```sql
+ALTER TABLE student_tracker.student AUTO_INCREMENT=100;
+```
+
+# Reset AUTO_INCREMENT back to 1
+
+```sql
+TRUNCATE TABLE student_tracker.student;
+```

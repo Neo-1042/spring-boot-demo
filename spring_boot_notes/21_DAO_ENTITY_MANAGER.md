@@ -61,7 +61,7 @@ custom queries using @Query.
 You can use both in the same project, depending on the
 project's needs.
 
-# Step by Step DAO Implementation
+# Step by Step DAO Implementation CREATE
 
 1. Define DAO interface.
 ```java
@@ -163,5 +163,67 @@ public class CruddemoApplication {
         // Display id of saved student
         System.out.println("Saved student with id = " + tempStudent.getId());
     }
+}
+```
+
+# DAO Implementation: READ
+
+```java
+// Retrieving a Java Object with JPA using the PK == 1
+Student myStudent = entityManager.find(Student.class, 1);
+```
+
+### Step 1: Add a new method to the DAO Interface
+
+```java
+import com.neo_1042.cruddemo.entity.Student;
+
+public interface StudentDAO {
+    
+    //CREATE
+    void save(Student newStudent);
+
+    //READ
+    Student findById(Integer id);
+}
+```
+
+### Step 2: Implement the new method
+
+```java
+import com.neo_1042.cruddemo.entity.Student;
+import jakarta.persistence.EntityManager;
+
+@Repository
+public class StudentDAOImpl implements StudentDAO {
+
+    private EntityManager entityManager;
+
+    // No need to add @Transactional, since this is
+    // a read-only operation. 
+    @Override
+    public Student findById(Integer id) {
+        // If nothing is found, return "null"
+        return entityManager.find(Student.class, id);
+    }
+}
+```
+
+### Step 3: Update the main app
+
+```java
+// ...
+
+private void readStudent(StudentDAO studentDAO) {
+
+    // Create a new student object
+    Student tmpStudent = new Student("Tom", "Riddle", "vold@gmail.com");
+
+    studentDAO.save(tmpStudent);
+
+    Student getStudent = studentDAO.findById(tmpStudent.getId());
+
+    System.out.println("Found the student " + myStudent);
+
 }
 ```
