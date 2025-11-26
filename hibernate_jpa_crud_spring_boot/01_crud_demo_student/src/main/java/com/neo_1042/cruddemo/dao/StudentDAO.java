@@ -1,6 +1,7 @@
 package com.neo_1042.cruddemo.dao;
 
 import com.neo_1042.cruddemo.entity.Student;
+import java.util.List;
 
 public interface StudentDAO {
 	// 'public' would be redundant for interface members
@@ -9,5 +10,9 @@ public interface StudentDAO {
 	void save(Student theStudent);
 
 	// READ
-	public Student findById(Integer id);
+	Student findById(Integer id);
+
+	// MULTIPLE READs
+	List<Student> findAll();
+
 }
