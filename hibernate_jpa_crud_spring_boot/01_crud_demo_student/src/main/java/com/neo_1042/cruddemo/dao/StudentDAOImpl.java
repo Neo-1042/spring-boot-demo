@@ -44,7 +44,12 @@ public class StudentDAOImpl implements StudentDAO {
 	@Override
 	public List<Student> findAll() {
 		// Create JPQL query
-		TypedQuery<Student> theQuery = entityManager.createQuery("SELECT s FROM Student s", Student.class);
+		StringBuilder strB = new StringBuilder("SELECT s");
+		strB.append(" FROM Student s");
+		strB.append(" ORDER BY s.lastName ASC");
+		System.out.println("The JPQL query is : ");
+		System.out.println(strB);
+		TypedQuery<Student> theQuery = entityManager.createQuery(strB.toString(), Student.class);
 
 		return theQuery.getResultList();
 	}
