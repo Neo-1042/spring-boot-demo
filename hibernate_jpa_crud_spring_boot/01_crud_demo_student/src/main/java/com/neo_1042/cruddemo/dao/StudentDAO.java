@@ -12,7 +12,10 @@ public interface StudentDAO {
 	// READ
 	Student findById(Integer id);
 
-	// MULTIPLE READs
+	// Multiple READs
 	List<Student> findAll();
+
+	// READ by lastName
+	List<Student> findByLastName(String theLastName);
 
 }

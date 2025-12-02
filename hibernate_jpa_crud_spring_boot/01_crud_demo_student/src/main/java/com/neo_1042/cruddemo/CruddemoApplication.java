@@ -28,7 +28,8 @@ public class CruddemoApplication {
 			// createStudent(studentDAO);
 			// createMultipleStudents(studentDAO);
 			// createReadStudent(studentDAO);
-			readAllStudents(studentDAO);
+			// readAllStudents(studentDAO);
+			readByLastName(studentDAO, "Garcia");
 		};
 	}
 
@@ -89,9 +90,21 @@ public class CruddemoApplication {
 
 		// Get the list of students
 		List<Student> theStudents = studentDAO.findAll();
+
 		// Display the list of students
-		System.out.println("Here's the list of all students so far: ");
+		System.out.println("Here is the list of all students so far: ");
 		for(Student tmpStudent : theStudents) {
+			System.out.println(tmpStudent);
+		}
+	}
+
+	private void readByLastName(StudentDAO studentDAO, String lastName) {
+		// Get all students with lastName=='Garcia'
+		List<Student> studentsByLastName = studentDAO.findByLastName(lastName);
+
+		// Display the list of Students
+		System.out.println("Here is the list of all students with last name = " + lastName);
+		for(Student tmpStudent : studentsByLastName) {
 			System.out.println(tmpStudent);
 		}
 	}
