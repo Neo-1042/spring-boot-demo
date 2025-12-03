@@ -29,7 +29,8 @@ public class CruddemoApplication {
 			// createMultipleStudents(studentDAO);
 			// createReadStudent(studentDAO);
 			// readAllStudents(studentDAO);
-			readByLastName(studentDAO, "Garcia");
+			// readByLastName(studentDAO, "Garcia");
+			updateStudent(studentDAO, 4); // Josh
 		};
 	}
 
@@ -107,5 +108,24 @@ public class CruddemoApplication {
 		for(Student tmpStudent : studentsByLastName) {
 			System.out.println(tmpStudent);
 		}
+	}
+
+	private void updateStudent(StudentDAO studentDAO, int studentId) {
+
+		// Retrieve the student with the passed ID
+		Student theStudent = studentDAO.findById(studentId);
+		System.out.println("Student info with id = " + studentId + " BEFORE the update: ");
+		System.out.println(theStudent);
+
+		// Change the last name
+		System.out.println("Updating the student ...");
+		theStudent.setLastName("Torvalds");
+
+		// Update the student's information
+		studentDAO.update(theStudent);
+
+		// Display the new information
+		System.out.println("Student info with id = " + studentId + " AFTER the update: ");
+		System.out.println(theStudent);
 	}
 }

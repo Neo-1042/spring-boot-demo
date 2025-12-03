@@ -227,3 +227,88 @@ private void readStudent(StudentDAO studentDAO) {
 
 }
 ```
+
+# DAO Implementation: UPDATE
+
+### Updating last name example:
+
+```java
+Student theStudent = entityManager.find(Student.class, 4);
+
+// Change the student's last name with id=4 (Josh)
+theStudent.setFirstName("Perez");
+
+// Update the entity
+entityManager.merge(theStudent);
+```
+
+### Updating last name for all students example:
+
+```java
+// Returns the number of affected row(s).
+int numRowsUpdated = entityManager.createQuery(
+    "UPDATE Student SET lastName='Tester' "
+).executeUpdate();
+```
+
+### Step 1: Modify StudentDAO.java
+
+```java
+public interface StudentDAO {
+
+    // ...
+    void update(Student theStudent);
+}
+```
+
+### Step 2: Modify StudentDAOImpl.java
+
+```java
+public class StudentDAOImpl implements StudentDAO {
+
+    private EntityManager entityManager;
+
+    // ...
+
+    @Override
+    @Transactional
+    public void update(Student theStudent) {
+        entityManager.merge(theStudent);
+    }
+}
+```
+
+### Step 3: Update main app
+
+```java
+@SpringBootApplication
+public class CruddemoApplication {
+
+    @Bean
+    public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
+
+        return runner -> {
+            // Update student with ID = 4
+            updateStudent(studentDAO, 4);
+        };
+    }
+
+    private void updateStudent(StudentDAO studentDAO, int studentId) {
+
+        // Retrieve student based on the id (PK)
+        System.out.println("Getting the student with id = " + studentId);
+
+        Student myStudent = studentDAO.findById(studentId);
+
+        System.out.println("Updating student ...");
+
+        // Change first name to "Scooby"
+        myStudent.setFirstName("Scooby");
+        studentDAO.update(myStudent);
+
+        // Display updated information
+        System.out.println("Update student: ");
+        System.out.println(myStudent);
+    }
+}
+```
