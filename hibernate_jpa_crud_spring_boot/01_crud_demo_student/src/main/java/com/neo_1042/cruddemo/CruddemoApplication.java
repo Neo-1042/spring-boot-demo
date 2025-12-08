@@ -30,7 +30,8 @@ public class CruddemoApplication {
 			// createReadStudent(studentDAO);
 			// readAllStudents(studentDAO);
 			// readByLastName(studentDAO, "Garcia");
-			updateStudent(studentDAO, 4); // Josh
+			// updateStudent(studentDAO, 4); // Josh
+			deleteStudentById(studentDAO, 8); // Rodrigo Garcia
 		};
 	}
 
@@ -127,5 +128,16 @@ public class CruddemoApplication {
 		// Display the new information
 		System.out.println("Student info with id = " + studentId + " AFTER the update: ");
 		System.out.println(theStudent);
+	}
+
+	private void deleteStudentById(StudentDAO studentDAO, int studentId) {
+		// Retrieve the student with the passed ID
+		Student theStudent = studentDAO.findById(studentId);
+		System.out.println("Deleting student with id = " + studentId);
+		System.out.println(theStudent);
+
+		// Delete the student
+		studentDAO.delete(studentId);
+
 	}
 }
