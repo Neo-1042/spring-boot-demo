@@ -119,7 +119,7 @@ public class CruddemoApplication {
 
 		// Change the last name
 		System.out.println("Updating the student ...");
-		theStudent.setLastName("Torvalds");
+		theStudent.setLastName("Peck");
 
 		// Update the student's information
 		studentDAO.update(theStudent);

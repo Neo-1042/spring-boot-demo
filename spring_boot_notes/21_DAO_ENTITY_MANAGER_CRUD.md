@@ -312,3 +312,88 @@ public class CruddemoApplication {
     }
 }
 ```
+
+# DAO Implementation: DELETE
+
+Main database operation is called in the StudentDAOImpl.java
+file:
+
+```java
+int id = 15; // ID to be deleted
+// Retrieve the student
+Student theStudent = entityManager.find(Student.class, id);
+
+// Delete the student
+entityManager.remove(theStudent);
+```
+
+## DELETE Based on a Condition
+
+```java
+int numRowsDeleted = entityManager.createQuery(
+    "DELETE FROM Student WHERE lastName = 'Smith'"
+).executeUpdate();
+```
+
+Note: in the JPA specification, "update" is a 
+<u>generic term</u>
+for "modifying" the database.
+
+## DELETE All of the Students
+
+```java
+int numRowsDeleted = entityManager.createQuery(
+    "DELETE FROM Student"
+).executeUpdate();
+```
+
+### DELETE Step 1: Add a new method to the DAO Interface
+
+File: StudentDAO.java
+```java
+public interface StudentDAO {
+    // ...
+    void delete(Integer id);
+}
+```
+
+### DELETE Step 2: Define the DAO Implementation
+
+```java
+public class StudentDAOImpl implements StudentDAO {
+    // ...
+    private EntityManager entityManager;
+
+    @Override
+    @Transactional
+    public void delete(Integer id) {
+        Student theStudent = entityManager.find(Student.class, id);
+
+        entityManager.remove(theStudent);
+    }
+}
+```
+
+### DELETE Step 3: Update main app
+
+File: CruddemoApplication.java
+```java
+@SpringBootApplication
+public class CruddemoApplication {
+
+    @Bean
+    public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
+
+        return runner -> {
+            deleteStudentById(studentDAO, 8);
+        };
+    }
+
+    private void deleteStudentById(StudentDAO studentDAO, int studentId) {
+
+        System.out.printl("Deleting the student with id = "
+            + studentId );
+        studentDAO.delete(studentId);
+    }
+}
+```
