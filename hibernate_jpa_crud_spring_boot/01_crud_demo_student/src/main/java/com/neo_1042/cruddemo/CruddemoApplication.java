@@ -31,7 +31,8 @@ public class CruddemoApplication {
 			// readAllStudents(studentDAO);
 			// readByLastName(studentDAO, "Garcia");
 			// updateStudent(studentDAO, 4); // Josh
-			deleteStudentById(studentDAO, 8); // Rodrigo Garcia
+			// deleteStudentById(studentDAO, 8); // Rodrigo Garcia
+			deleteAllStudents(studentDAO);
 		};
 	}
 
@@ -139,5 +140,13 @@ public class CruddemoApplication {
 		// Delete the student
 		studentDAO.delete(studentId);
 
+	}
+
+	private void deleteAllStudents(StudentDAO studentDAO) {
+
+		System.out.println("Deleting all students ...");
+		int numRowsDeleted = studentDAO.deleteAll();
+
+		System.out.println(numRowsDeleted + " rows deleted.");
 	}
 }
