@@ -27,12 +27,12 @@ public class CruddemoApplication {
 		return runner -> {
 			// createStudent(studentDAO);
 			// createMultipleStudents(studentDAO);
-			// createReadStudent(studentDAO);
-			// readAllStudents(studentDAO);
+			//createReadStudent(studentDAO);
+			readAllStudents(studentDAO);
 			// readByLastName(studentDAO, "Garcia");
 			// updateStudent(studentDAO, 4); // Josh
 			// deleteStudentById(studentDAO, 8); // Rodrigo Garcia
-			deleteAllStudents(studentDAO);
+			// deleteAllStudents(studentDAO);
 		};
 	}
 
