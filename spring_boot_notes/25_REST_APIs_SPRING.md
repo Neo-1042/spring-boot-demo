@@ -76,3 +76,62 @@ Services = REST services = RESTful Services.
 
 Generally, they all mean the same thing. (RESTful has a
 couple more HTTP verbs)
+
+# Spring Boot HTTP Basics
+
+The most common use of REST is over the HTTP (Hypertext
+Transfer Protocol) protocol. We can leverage the HTTP verbs
+for CRUD operations:
+
+| HTTP Method      | CRUD Operation |
+| :------:         |     :------:      |
+| POST |  CREATE  |
+| GET  |  READ  |
+| PUT  | UPDATE |
+| DELETE | DELETE |
+
+## HTTP Messages
+
+The client (MyCRMApp) will send an HTTP Request Message to
+the server (CRM REST Service), the server then will respond
+with an HTTP Response Message.
+
+### HTTP Request Message
+
+1. Request Line -> HTTP verb.
+2. Header Variables -> Request metadata.
+3. Message Body -> Contents. Actual payload.
+
+### HTTP Response Message
+
+1. Response Line -> Server protocol and status code.
+2. Header Variables -> Response metadata.
+3. Message Body -> Response message. Processed payload.
+
+## HTTP Response - Status Codes
+
+- 1xx -> INFO
+- 2xx -> SUCCESS
+- 3xx -> REDIRECTION
+- 4xx -> CLIENT-SIDE ERROR
+- 5xx -> SERVER-SIDE ERROR
+
+## MIME Content Types
+
+MIME = Multipurpose Internet Mail-Extension
+
+The message format is described by the MIME content type:
+XML, JSON, etc. 
+
+Basic syntax: ```type/sub-type```
+
+Examples: ```text/html, text/plain, application/json,
+application/xml```.
+
+## Client Tool (curl, Insomnia, Postman)
+
+A tool to send HTTP requests to the REST Web Service / API. 
+
+```curl``` is a popular command-line client tool.
+
+\* Download POSTMAN
