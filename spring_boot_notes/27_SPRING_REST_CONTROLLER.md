@@ -82,3 +82,27 @@ public class StudentRestController {
     }
 }
 ```
+
+# Path Variables with @PathVariable
+
+Retrieve a single student by studentId.
+
+```GET``` /api/students/{studentId}
+
+```java
+@RestController
+@RequestMapping("/api")
+public class StudentRestController {
+
+    // New endpoint
+    @GetMapping("/students/{studentId}")
+    public Student getStudent(@PathVariable int studentId) {
+
+        List<Student> theStudents = new ArrayList<>();
+        // Manually Populate the students
+
+        // Index into the list
+        return theStudent.get(studentId);
+    }
+}
+```

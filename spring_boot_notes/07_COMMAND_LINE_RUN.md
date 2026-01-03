@@ -7,9 +7,12 @@ JAR file**, so there is no need to have a separate server installed/running.
 
 &#x2611; Spring Boot apps are self-contained.
 
-### Option 1: Good-old java command
+### Option 1: mvnw + Good-old java command
 
-```java -jar mycoolapp.jar```
+```bash
+./mvnw package
+java -jar mycoolapp.jar
+```
 
 ### Option 2: Use Spring Boot Maven plugin
 
