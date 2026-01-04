@@ -68,14 +68,19 @@ File: StudentRestController.java
 @RequestMapping("/api")
 public class StudentRestController {
 
-    // Define endpoint for "/students"
-    @GetMapping("/students")
-    public List<Student> getStudents() {
+    private List<Student> theStudents;
 
-        List<Student> theStudents = new ArrayList<>();
+    // @PostConstruct is called only once
+    @PostConstruct
+    public void loadData() {
+        theStudents = new ArrayList<>();
         theStudents.add(new Student("Rodrigo","Hurtado"));
         theStudents.add(new Student("Compare","Gera"));
         theStudents.add(new Student("Emiliano", "Gonce"));
+    }
+    // Define endpoint for "/students"
+    @GetMapping("/students")
+    public List<Student> getStudents() {
 
         // Jackson converts List<Student> to JSON array
         return theStudents; 
@@ -95,14 +100,12 @@ Retrieve a single student by studentId.
 public class StudentRestController {
 
     // New endpoint
+    // By default, variables 'studentId' must match
     @GetMapping("/students/{studentId}")
     public Student getStudent(@PathVariable int studentId) {
 
-        List<Student> theStudents = new ArrayList<>();
-        // Manually Populate the students
-
-        // Index into the list
-        return theStudent.get(studentId);
+        // Access the private students list.get(index)
+        return theStudents.get(studentId);
     }
 }
 ```
