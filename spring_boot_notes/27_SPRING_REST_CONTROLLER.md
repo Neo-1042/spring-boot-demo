@@ -51,12 +51,12 @@ needs to be converted into JSON data.
 ```mermaid
 classDiagram
     class Student {
-        +String firstName
-        +String lastName
-        +getFirstName()
-        +setFirstName()
-        +getLastName()
-        +setLastName()
+        -String firstName
+        -String lastName
+        +String getFirstName()
+        +void setFirstName()
+        +String getLastName()
+        +void setLastName()
     }
 ```
 
