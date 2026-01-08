@@ -109,3 +109,5 @@ public class StudentRestController {
     }
 }
 ```
+
+## Add Exception Handler for string bad requests
