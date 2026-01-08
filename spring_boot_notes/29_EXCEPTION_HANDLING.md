@@ -110,4 +110,76 @@ public class StudentRestController {
 }
 ```
 
-## Add Exception Handler for string bad requests
+## Add Exception Handler for General BAD_REQUEST = 400
+
+```java
+@RestController
+@RequestMapping("/api")
+public class StudentRestController{
+    // ...
+    // Exception handler to manage all other bad requests
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(Exception exc) {
+
+        StudentErrorResponse error = new StudentErrorResponse();
+
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.setMessage(exc.getMessage());
+        error.setTimeStamp(System.currentTimeMillis());
+
+        return ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+}
+```
+
+# Global Exception Handling for Multiple Spring Controllers
+
+The previous exception handlers are designed for a specific
+REST controller and cannot be reused by other controllers :c
+
+## @ControllerAdvice and AOP
+
+The Spring <code>@ControllerAdvice</code> annotation is
+similar to an interceptor/filter. 
+
+[+] Pre-process requests to controllers
+[+] Post-process responses to handle exceptions
+[+] Perfect for global exception handling
+
+This is a real-time application of
+**AOP = Aspect Oriented Programming**
+
+REST client ---> @ControllerAdvice ---> REST Service
+
+This way, exception handling is moved out of the REST service
+itself.
+
+## AOP Development Process
+
+1. Create new @ControllerAdvice java class:
+
+File: StudentRestExceptionHandler.java
+
+2. Refactor REST service by removing the exception handling
+code.
+
+3. Add the same exception handling code we had 
+to the new class:
+
+```java
+@ControllerAdvice
+public class StudentRestExceptionHandler {
+    
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exc) {
+
+        StudentErrorResponse error = new StudentErrorResponse();
+
+        error.setStatus(HttpStatus.NOT_FOUND.value());
+        error.setMessage(exc.getMessage());
+        error.setTimeStamp(System.currentTimeMillis());
+
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+}
+```
