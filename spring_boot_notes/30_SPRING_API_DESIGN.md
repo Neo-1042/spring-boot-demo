@@ -44,3 +44,18 @@ Do NOT include actions in the endpoint:
 - /api/updateEmployee ---> DON'T
 
 > Instead, use the HTTP methods to assign the actions!
+
+### Real World API Examples
+
+[+] PayPal Invoicing API:  
+`https://developer.paypal.com/docs/api/invoicing/`  
+Perform CRUD operations on invoices.
+
+[+] GitHub Repositories API  
+`https://developer.github.com/v3/repos/#repositories`  
+New notation for path variables:  
+`DELETE /repos/:owner/:repo` = `DELETE /repos/{owner}/{repo}`
+
+[+] SalesForce REST API  
+Industries REST API to manage individuals:  
+`https://sforce.co/2J40ALH`
