@@ -64,3 +64,39 @@ Package name = com.neo_1042.crud_employee
 | MySQL Driver     | MySQL JDBC Driver |
 
 ---> Import project into IntelliJ IDEA/Visual Studio Code.
+
+# Employee DAO with JPA
+
+**Use the SAME interface for a consistent API**
+
+```java
+
+@Repository
+public class EmployeeDAOJPAImpl implements EmployeeDAO {
+
+    private EntityManager entityManager;
+
+    @Autowired
+    public EmployeeDAOJPAImpl(EntityManager theEntityManager) {
+        entityManager = theEntityManager;
+    }
+}
+```
+
+### Get a List of Employees
+
+```java
+@Override
+public List<Employee> findAll() {
+
+    // Create a typed query
+    TypedQuery<Employee> theQuery
+        = entityManager.createQuery("FROM Employee", Employee.class);
+
+    // Execute query and get result list
+    List<Employee> employees = theQuery.getResultList();
+
+    // Return the results
+    return employees;
+}
+``` 
