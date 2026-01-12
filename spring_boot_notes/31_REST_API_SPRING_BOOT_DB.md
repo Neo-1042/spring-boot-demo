@@ -41,3 +41,26 @@ flowchart LR
         <--> C[Employee</br>DAO]
         <--> D[(DB)]
 ```
+
+## Setup Database Dev Environement
+
+> From "MySQLWorkbench" run the script: **employee.sql**
+This will create a database schema called
+"employee_directory" and a database table called "employee"
+
+```sql
+SELECT * FROM employee_directory.employee;
+```
+
+## Spring Initializr
+
+Package name = com.neo_1042.crud_employee
+
+|Dependencies | Description |
+| :------     | :------     |
+| Spring Web       | Build web, RESTful applications using Spring MVC. Uses Apache Tomcat as the default embbeded container. |
+| Spring Data JPA  | Persist data with JPA, Spring Data and Hibernate |
+| Spring Dev Tools | Provides fast application restarts and LiveReload |
+| MySQL Driver     | MySQL JDBC Driver |
+
+---> Import project into IntelliJ IDEA/Visual Studio Code.
