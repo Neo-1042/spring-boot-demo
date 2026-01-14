@@ -83,7 +83,7 @@ public class EmployeeDAOJPAImpl implements EmployeeDAO {
 }
 ```
 
-### Get a List of Employees
+## Get a List of Employees (Standard JPA)
 
 ```java
 @Override
@@ -99,4 +99,12 @@ public List<Employee> findAll() {
     // Return the results
     return employees;
 }
-``` 
+```
+
+Next steps in code:
+
+1. Update DB configuration in `application.properties`
+2. Code Employee entity
+3. Code DAO interface
+4. Code DAO implementation
+5. Code a REST controller to use the DAO
