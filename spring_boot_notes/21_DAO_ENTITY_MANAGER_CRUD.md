@@ -52,7 +52,8 @@ In simple terms:
 You need to write custom queries, native SQL queries
 or stored procedure calls.
 
-2. **JpaRepository** -> high-level of abstracton. It provides
+2. **JpaRepository** -> high-level of abstraction. 
+It provides
 commonly used CRUD operations. It has additional features
 such as pagination and sorting. You can generate
 queries based on method names and you can create
