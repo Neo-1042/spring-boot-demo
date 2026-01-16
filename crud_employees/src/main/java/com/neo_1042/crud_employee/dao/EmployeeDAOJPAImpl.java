@@ -6,7 +6,6 @@ import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 // When you add the @Repository annotation, Spring will automatically register
@@ -17,6 +16,7 @@ public class EmployeeDAOJPAImpl implements EmployeeDAO {
 	private EntityManager entityManager;
 
 	// Inject the EntityManager (Constructor injection)
+	// The bean "theEntityManager" is automatically created by Spring Boot
 	@Autowired
 	public EmployeeDAOJPAImpl(EntityManager theEntityManager) {
 		entityManager = theEntityManager;
@@ -24,7 +24,7 @@ public class EmployeeDAOJPAImpl implements EmployeeDAO {
 
 	@Override
 	public List<Employee> findAll() {
-		TypedQuery<Employee> theQuery = entityManager.createQuery("FROM employee", Employee.class);
+		TypedQuery<Employee> theQuery = entityManager.createQuery("SELECT e FROM Employee e", Employee.class);
 
 		return theQuery.getResultList();
 	}
