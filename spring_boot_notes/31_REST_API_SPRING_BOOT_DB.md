@@ -32,14 +32,13 @@ Main Entity: Employees
 6. UPDATE an employee.
 7. DELETE an employee.
 
-## Application Architecture
+## (Initial) Application Architecture Design
 
 ```mermaid
 flowchart LR
     A[Employee</br>REST</br>Controller]
-        <--> B[Employee</br>Service]
-        <--> C[Employee</br>DAO]
-        <--> D[(DB)]
+        <--> B[Employee</br>DAO]
+        <--> C[(DB)]
 ```
 
 ## Setup Database Dev Environement
@@ -108,3 +107,73 @@ Next steps in code:
 3. Code DAO interface
 4. Code DAO implementation
 5. Code a REST controller to use the DAO
+
+# Refactor: Add a Service (FACADE) Layer
+
+```mermaid
+flowchart LR
+    A[Employee</br>REST</br>Controller]
+        <--> B[Employee</br>Service]
+        <--> C[Employee</br>DAO]
+        <--> D[(DB)]
+```
+
+## Purpose of the Service Layer
+
+[+] Service Facade Design Pattern
+
+[+] Intermediate layer for **custom business logic**.
+
+[+] Integrate data from multiple sources (DAO/Repositories).
+
+```mermaid
+flowchart LR
+    A[Employee</br>REST</br>Controller]
+        <--> B[Employee</br>Service]
+        <--> C[Employee</br>DAO] <--> D[(DB)]
+    B <--> E[Skills</br>DAO] <--> F[(DB)]
+    B <--> G[Payroll</br>DAO] <--> H[(DB)]
+```
+
+[+] Provide the controller with a **single view** of the data
+that we integrated from multiple backend datasources.
+
+## Specialized Annotation for Services
+
+- Spring provides the @Service annotation.
+
+::: mermaid
+graph TD;
+    A["@Component"]-->B["@RestController"];
+    A-->C["@Repository"];
+    A-->D["@Service"];
+:::
+
+Spring will automatically register the 
+**Service implementation**
+thanks to component-scanning.
+
+### Development Process for the Service Interface
+
+1. Define Service interface
+
+```java
+public interface EmployeeService {
+    List<Employee> findAll();
+}
+```
+
+2. Define Service implementation  
+Inject the EmployeeDAO
+
+```java
+@Service
+public class EmployeeServiceImpl implements EmployeeService {
+    
+    // Constructor injection -> EmployeeDAO
+    @Override
+    public List<Employee> findAll() {
+        return employeeDAO.findAll();
+    }
+}
+```
