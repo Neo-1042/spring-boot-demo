@@ -177,3 +177,55 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 }
 ```
+
+# Service Layer: Best Practices
+
+- Apply transactional boundaries at the service layer.
+- It is the service layer's responsability to manage
+transaction boundaries.
+- For implementation code:
+    - Apply `@Transactional` on service methods.
+    - Remove `@Transactional` on DAO methods if they already
+    exist.
+
+# DAO: READ a single employee by ID (findById)
+
+```java
+public class EmployeeDAOJPAImpl implements EmployeeDAO {
+    // ...
+    @Override
+    public Employee findById(int theId) {
+
+        Employee theEmployee = entityManager.find(Employee.class, theId);
+
+        return theEmployee;
+    }
+}
+```
+
+# DAO: CREATE or UPDATE Employee (save or update)
+
+```java
+@Override
+public Employee save(Employee the Employee) {
+
+    // If id == 0, then save/insert. Else, update
+    Employee dbEmployee = entityManager.merge(theEmployee);
+
+    // dbEmployee has the updated if from the database.
+    return dbEmployee;
+}
+```
+
+# DAO: DELETE an existing employee (remove)
+
+```java
+@Override
+public void deleteById(int theId) {
+    // Find the employee by id
+    Employee theEmployee = entityManager.findById(Employee.class, theId);
+
+    // Delete the employee
+    entityManager.remove(theEmployee);
+}
+```

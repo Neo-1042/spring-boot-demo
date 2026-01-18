@@ -6,5 +6,15 @@ import java.util.List;
 
 public interface EmployeeDAO {
 
+	// READ
 	List<Employee> findAll();
+
+	// READ by id
+	Employee findById(int id);
+
+	// CREATE or UPDATE
+	Employee save(Employee theEmployee);
+
+	// DELETE
+	void deleteById(int theId);
 }
