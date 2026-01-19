@@ -229,3 +229,11 @@ public void deleteById(int theId) {
     entityManager.remove(theEmployee);
 }
 ```
+
+> Reminder: When sending JSON to Spring REST Controllers,
+don't forget to set an **HTTP request header**:
+
+`Content-type: application/json`
+
+Using POSTMAN, we set the HTTP request header in:  
+Body > raw > JSON (application/json).
