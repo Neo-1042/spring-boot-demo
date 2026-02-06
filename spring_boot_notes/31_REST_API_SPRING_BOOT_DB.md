@@ -140,7 +140,8 @@ that we integrated from multiple backend datasources.
 
 ## Specialized Annotation for Services
 
-- Spring provides the @Service annotation.
+- Spring provides the @Service annotation, which
+goes with the ServiceImplementation class.
 
 ::: mermaid
 graph TD;
@@ -180,7 +181,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 # Service Layer: Best Practices
 
-- Apply transactional boundaries at the service layer.
+- Apply **transactional boundaries** at the service layer.
 - It is the service layer's responsability to manage
 transaction boundaries.
 - For implementation code:
