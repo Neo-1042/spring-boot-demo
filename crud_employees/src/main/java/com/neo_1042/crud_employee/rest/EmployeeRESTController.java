@@ -4,10 +4,7 @@ import com.neo_1042.crud_employee.dao.EmployeeDAO;
 import com.neo_1042.crud_employee.entity.Employee;
 import com.neo_1042.crud_employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,6 +40,19 @@ public class EmployeeRESTController {
 	}
 
 	// CREATE with POST
+	// New: @PostMapping, @RequestBody
+	@PostMapping("/employees")
+	public Employee addEmployee(@RequestBody Employee theEmployee) {
+
+		// In case they pass an ID in JSON, set id to 0
+		// This is to prevent updating, instead of creating a new employee
+		theEmployee.setId(0);
+		// theEmployee.setId(null); In case your field uses the wrapper class 'Integer'
+
+		Employee dbEmployee = employeeService.save(theEmployee);
+
+		return dbEmployee;
+	}
 
 
 	// UPDATE with PUT
