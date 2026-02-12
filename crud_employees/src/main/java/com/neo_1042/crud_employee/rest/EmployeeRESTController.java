@@ -54,9 +54,15 @@ public class EmployeeRESTController {
 		return dbEmployee;
 	}
 
-
 	// UPDATE with PUT
+	// New: @PutMapping
+	@PutMapping("/employees")
+	public Employee updateEmployee(@RequestBody Employee theEmployee) {
 
+		Employee dbEmployee = employeeService.save(theEmployee);
+
+		return dbEmployee;
+	}
 
 	// DELETE by id with DELETE
 
