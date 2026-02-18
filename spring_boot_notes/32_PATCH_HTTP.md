@@ -108,5 +108,5 @@ If you have complex use cases like:
 
 You may want to look at the RFCs for PATCH (rfc-editor.org):
 
-- rfc6902
-- rfc7386
+- rfc6902 JSON PATCH
+- rfc7386 JSON Merge PATCH

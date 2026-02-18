@@ -6,7 +6,10 @@ import com.neo_1042.crud_employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import tools.jackson.databind.json.JsonMapper;
+
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -14,10 +17,14 @@ public class EmployeeRESTController {
 
 	private EmployeeService employeeService;
 
-	// Quick and dirty: inject employee DAO
+	private JsonMapper jsonMapper;
+
+	// Constructor Injection for the Service and the JsonMapper
 	@Autowired
-	public EmployeeRESTController(EmployeeService theEmployeeService) {
+	public EmployeeRESTController(EmployeeService theEmployeeService, JsonMapper theJsonMapper) {
 		employeeService = theEmployeeService;
+		// JsonMapper is auto-configured by Spring Boot for JSON processing
+		jsonMapper = theJsonMapper;
 	}
 
 	// Expose /employees ENDPOINT
@@ -60,6 +67,31 @@ public class EmployeeRESTController {
 	public Employee updateEmployee(@RequestBody Employee theEmployee) {
 
 		Employee dbEmployee = employeeService.save(theEmployee);
+
+		return dbEmployee;
+	}
+
+	// (partial) UPDATE with PATCH
+	// New: @PatchMapping
+	// JSON DATA is passed in as a MAP of key-value pairs
+	@PatchMapping("/employees/{employeeId}")
+	public Employee patchEmployee(@PathVariable int employeeId,
+								  @RequestBody Map<String,Object> patchPayload) {
+		Employee tmpEmployee = employeeService.findById(employeeId);
+
+		if ( tmpEmployee == null ) {
+			throw new RuntimeException("Employee ID not found");
+		}
+		// ID should not be allowed in the payload, since PK should not be changed
+		if ( patchPayload.containsKey("id") ) {
+			throw new RuntimeException("Employee ID not allowed in the request body");
+		}
+
+		// This patched Employee lives only in memory so far:
+		Employee patchedEmployee = jsonMapper.updateValue(tmpEmployee, patchPayload);
+
+		// Thus, we need to persist this Employee to the DB:
+		Employee dbEmployee = employeeService.save(patchedEmployee);
 
 		return dbEmployee;
 	}
