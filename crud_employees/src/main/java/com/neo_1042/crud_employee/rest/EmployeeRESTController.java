@@ -96,8 +96,18 @@ public class EmployeeRESTController {
 		return dbEmployee;
 	}
 
-	// DELETE by id with DELETE
+	// DELETE by id with DELETE HTTP Verb
+	@DeleteMapping("/employees/{employeeId}")
+	public String deleteEmployee(@PathVariable int employeeId) {
+		Employee employeeBye = employeeService.findById(employeeId);
 
+		if (employeeBye == null) {
+			throw new RuntimeException("Invalid Information");
+		}
+
+		employeeService.deleteById(employeeId);
+		return "Deleted employee with ID = " + employeeId;
+	}
 
 
 }
