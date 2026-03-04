@@ -109,3 +109,47 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 }
 ```
+
+## Spring Data JPA Advanced Features
+
+- Extending and adding custom queries with JPQL.
+- Query Domain Specific Language (Query DSL)
+- Defining custom methods (lower-level coding)
+
+# Migrate from Manual JPA to JpaRepository
+
+1. Delete all DAOs from the dao package (not the actual folder)
+2. Substitute this by the "EmployeeRepository.java" interface,  
+extending "JpaRepository<Employee,Integer>"
+
+3. At the service layer, substitute "EmployeeDAO" to
+"EmployeeRepository", including all of the calls to the DAO.
+
+4. Remove the `@Transactional` annotations in the 
+"EmployeeServiceImpl.java" file, since `JpaRepository`
+provides this functionality.
+
+5. Refactor all necessary code that show errors:
+`You cannot convert Optional<Employee> to Employee`, by doing:
+
+```java
+// Optional was introduced from Java 8
+import java.util.Optional;
+
+@Override
+public Employee findById(int id) {
+    // Refactor as a local variable
+    // Optional is a different pattern that replaces having to check for nulls.
+    // java.util.Optional was introduced from Java 8
+    Optional<Employee> result = employeeRepository.findById(id);
+
+    Employee theEmployee = null;
+
+    if (result.isPresent()) {
+        theEmployee = result.get();
+    } else {
+		throw new RuntimeException("Did not findemployee");
+	}
+    return theEmployee;
+}
+```

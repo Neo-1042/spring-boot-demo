@@ -1,6 +1,6 @@
 package com.neo_1042.crud_employee.rest;
 
-import com.neo_1042.crud_employee.dao.EmployeeDAO;
+// import com.neo_1042.crud_employee.dao.EmployeeDAO;
 import com.neo_1042.crud_employee.entity.Employee;
 import com.neo_1042.crud_employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
