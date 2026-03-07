@@ -153,3 +153,101 @@ public Employee findById(int id) {
     return theEmployee;
 }
 ```
+
+# Spring Data REST
+
+[https://spring.io/projects/spring-data-rest](https://spring.io/projects/spring-data-rest)
+
+Spring Data REST allows you to have a full
+REST CRUD implementation, by only specifying the new
+needed entity with its PK.
+
+- Spring Data REST will scan your project for
+any `JpaRepository`.
+- Expose REST APIs for each entity type for your
+`JpaRepository`.
+
+- By default, Spring Data REST will create endpoints
+based on entity type.
+
+- Simple pluralized form:
+    - The first character of the Entity type is lowercase
+    - Just add an "s" at the end:
+
+`[...]extends JpaRepository<Employee, Integer> ---> /employees`
+
+# Spring Data REST Development Process
+
+1. Add Spring Data REST to your maven pom.xml file.
+
+```xml
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-rest</artifactId>
+    </dependency>
+```
+
+## In a Nutshell
+
+1. The Entity = `Book`
+2. JpaRepository =  
+    `BookRepository extends JpaRepository<Book, Integer>`
+3. Maven POM dependency = `spring-boot-starter-data-rest`
+
+### BEFORE Spring Data REST (Spring Data JPA only):
+
+```mermaid
+flowchart LR
+    A["Employee</br>REST</br>Controller"] <-->
+    B["Employee</br>Service"] <-->
+    C["Employee</br>Repository</br>Spring Data JPA"] <-->
+    D[(DB)]
+```
+
+### AFTER Spring Data REST:
+
+```mermaid
+flowchart LR
+    A["Spring Data REST</br>/employees"] <--->
+    B["Employee</br>Repository</br>Spring Data JPA"] <--->
+    C[(DB)]
+```
+
+# HATEOAS
+
+- Spring Data REST endpoints are HATEOS-compliant.  
+HATEOS = **Hypermedia as the Engine of Application State**
+
+- Hypermedia-driven sites provide information to access
+REST interfaces --> Metadata for the REST data.
+
+- Spring Data REST response using HATEOAS
+- For example, a REST response from: `GET: /employees/10`
+
+```json
+{
+    "firstName" : "Neo",
+    "lastName" : "Rabbit",
+    "email" : "neo@matrix.com",
+    "_links" : {
+        "self" : {
+            "href" : "http://localhost:8080/employees/10"
+        },
+        "employee" : {
+            "href" : "http://localhost:8080/employees/10"
+        }
+    }
+}
+```
+
+- For a collection, the metadata includes the page size,
+total elements, pages, totalElements, number, etc.
+
+> HATEOAS uses the Hypertext Application Language = HAL
+data format.
+
+# Spring Data REST Advanced Features
+
+- Pagination, sorting and searching.
+- Extending and adding custom queries with JPQL.
+- Query Domain Specific Language (Query DSL).
