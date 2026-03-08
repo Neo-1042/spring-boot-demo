@@ -281,3 +281,24 @@ java -jar target/crud_employees-0.0.1-SNAPSHOT.jar
 # New Endpoint:
 localhost:8080/employees
 ```
+
+# Customize our Endpoint Base Path
+
+File = src/main/resources/application.properties
+
+```properties
+# Spring Data REST customization
+spring.data.rest.base-path=/magic-api
+```
+
+New endpoint = `http://localhost:8080/magic-api/employees`
+
+## IMPORTANT: Spring Data REST only uses the IDs as PathVariables.
+
+http://localhost:8080/magic-api/employees
+
+Body = { "id" : 4 , ...}
+
+becomes:
+
+http://localhost:8080/magic-api/employees/4
