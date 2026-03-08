@@ -148,7 +148,7 @@ public Employee findById(int id) {
     if (result.isPresent()) {
         theEmployee = result.get();
     } else {
-		throw new RuntimeException("Did not findemployee");
+		throw new RuntimeException("Did not find employee");
 	}
     return theEmployee;
 }
@@ -251,3 +251,33 @@ data format.
 - Pagination, sorting and searching.
 - Extending and adding custom queries with JPQL.
 - Query Domain Specific Language (Query DSL).
+
+# Migrating to Spring Data REST
+
+- Delete the *DAOImpl.java files.
+- Delete the CONTROLLER (`rest/`) package.
+- Delete the SERVICE (`service/`) package.
+
+# Build Process (Reminder):
+
+1. Start the MySQL server and run the initial scripts:
+```bash
+sudo /usr/local/mysql/support-files/mysql.server start
+# Access
+/usr/local/mysql/bin/mysql -u root -p
+
+source /Users/rafael1642/GIT/Projects/spring-boot-demo/crud_employees/spring-boot-employee-sql-script/employee-directory.sql
+```
+
+2. Build and run the application:
+```bash
+cd ~/GIT/Projects/spring-boot-demo/crud_employees
+# Build
+./mvnw package
+
+# Run
+java -jar target/crud_employees-0.0.1-SNAPSHOT.jar
+
+# New Endpoint:
+localhost:8080/employees
+```
