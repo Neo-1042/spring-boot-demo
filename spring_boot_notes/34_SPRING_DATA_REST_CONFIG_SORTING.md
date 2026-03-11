@@ -45,3 +45,5 @@ parameters.
 - We can sort by the property names of your entity.
 
 `http://localhost:8080/employees?sort=lastName,desc`
+
+> Page Numbers start with `0`.
