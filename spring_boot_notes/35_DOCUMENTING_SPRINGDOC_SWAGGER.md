@@ -78,7 +78,7 @@ Access API Docs at:
 `http://localhost:8080/my-api-docs` JSON  
 `http://localhost:8080/my-api-docs.yaml` YAML
 
-# IMPORTANT:
+# IMPORTANT Restrictions
 
 - OpenAPI/Swagger does NOT currently work with Spring Data REST
 in Spring Boot 4.
