@@ -28,7 +28,7 @@ class.
 
 ## Using Polymorphism
 
-### One Step Closer into Polymorphism:
+### One Step Closer to Polymorphism:
 
 ```java
 // This parent object can be an abstract class or an interface
@@ -84,7 +84,11 @@ Therefore, in the application class we need to have only a
 `Shape` object, and then, we need to ask another class
 to provide us with the especific shape: Triangle or Circle.
 
-### Drawing Class
+### Drawing Class. De-coupling the Application Class from the Triangle
+
+Instead of having an instance of the Triangle or Circle in
+our Drawing class, it only knows about the instance
+of the more general class (Shape):
 
 ```java
 protected class Drawing {
@@ -102,3 +106,22 @@ protected class Drawing {
     }
 }
 ```
+
+Different class:
+```java
+Triangle myTriangle = new Triangle();
+
+// The drawing class does not know anything about the Triangle
+drawing.setShape(myTriangle);
+drawing.drawShape();
+```
+
+> The main idea of dependency inversion/injection is to separate,
+to de-couple the dependency of the Drawing class to other classes. 
+The Drawing class "has no idea" of which other classes it needs.
+The advantage is that you don't need to modify the Drawing class
+in order to add more shapes.
+
+The dependency of the Drawing class to another class is not
+hard-coded in the Drawing class. Rather, it is INJECTED
+by a completely different class.
