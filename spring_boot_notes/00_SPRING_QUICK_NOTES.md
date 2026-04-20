@@ -28,7 +28,7 @@ class.
 
 ## Using Polymorphism
 
-### A Step Closer into Polymorphism:
+### One Step Closer into Polymorphism:
 
 ```java
 // This parent object can be an abstract class or an interface
@@ -59,5 +59,46 @@ public class DemoShapes {
 
     Shape shape2 = new Cirlce();
     shape2.draw(); // calls the Circle method
+}
+```
+
+Depending on the instance, it will execute its correspondent
+draw() method. However, in the next snippet, we still
+have a dependency to the `Triangle` class in the same
+Application class:
+```java
+public class DemoShapes {
+
+    public void myDrawMethod(Shape shape) {
+        shape.draw()
+    }
+
+    // Somewhere else in the class, you are still coupled
+    // to a Triangle object:
+    Shape shape = new Triangle();
+    myDrawMethod(shape);
+}
+```
+
+Therefore, in the application class we need to have only a
+`Shape` object, and then, we need to ask another class
+to provide us with the especific shape: Triangle or Circle.
+
+### Drawing Class
+
+```java
+protected class Drawing {
+
+    private Shape shape;
+
+    // Can accept any child class of Shape:
+    public setShape(Shape shape) {
+        this.shape = shape;
+    }
+
+    // Calls the draw() method specific to the shape
+    public drawShape() {
+        this.shape.draw();
+    }
 }
 ```
