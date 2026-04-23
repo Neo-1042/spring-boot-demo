@@ -75,3 +75,23 @@ and use different data storage technologies."
 3. Dynamic Scaling -> You should be able to quickly 
 increase/decrease the number of instances of a microservice,
 regardless of how many you have.
+
+## Movie Booking Application Example
+
+Instead of having a large monolith application, it would be
+better to separate each component of a movie booking app like so:
+
+1. MovieService -> Movie details, schedule and availability.
+2. BookingService -> Ticket booking, seat selection and
+booking management.
+3. PricingService -> Ticket pricing, discounts and special
+offers.
+4. CustomerService -> Manages customer profiles, authentication
+and customer support.
+5. ReviewService -> Submit reviews, ratings and comments.
+
+# Advantages of Microservices
+
+1. Flexibility and Innovation (new technologies).
+2. Dynamic Scaling.
+3. Faster Release Cycles.
