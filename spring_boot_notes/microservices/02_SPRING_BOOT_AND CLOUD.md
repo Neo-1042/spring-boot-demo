@@ -38,5 +38,22 @@ Management, ...).
 - Database
 - Queue
 
+The Config Server solution will allow you to manage all
+of the project's configuration in a single Git Repo.
 
+Spring Initializr
 
+GroupID = com.neo_1042.microservices
+ArtifactID = limits-service
+
+Dependencies = {Spring Web, Spring Boot Actuator, Spring Boot
+Dev Tools, Config Client}
+
+## Example: limits_service (as a dependency for Spring Cloud Config Server)
+
+File = application.properties
+```properties
+spring.application.name=limits_service
+# Add this line to make the config server optional
+spring.config.import=optional:configserver:http://localhost:8888
+```
