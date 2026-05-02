@@ -61,9 +61,10 @@ spring.config.import=optional:configserver:http://localhost:8888
 # Create a Local Git Repository for the Config Server
 
 ```bash
-cd /Users/rafael1642/GIT/Projects/spring-boot-demo/microservices_projects
+mkdir /Users/rafael1642/Desktop/Computer_Science/Java/Microservices/git-localconfig-repo
 
-mkdir git-local-config-repo
+cd mkdir /Users/rafael1642/Desktop/Computer_Science/Java/Microservices/git-localconfig-repo
+
 cd git-local-config-repo
 git init
 # Create a properties file:
@@ -72,8 +73,13 @@ touch limits-service.properties
 cp limits_service/src/main/resources/application.properties limits-service.properties
 git add -A
 git commit -m "Add limits-service.properties file"
-git push -u origin develop
 ```
 
-## Connecting: limits-service <-> config-server <-> git repo
+Add a reference to this file to "/Users/rafael1642/GIT/Projects/spring-boot-demo/microservices_projects/config-server/src/main/resources/application.properties"
+```properties
+spring.application.name=config-server
+server.port=8888
+# Add only until the containing folder of the properties file:
+spring.cloud.config.server.git.uri=file:///Users/rafael1642/Desktop/Computer_Science/Java/Microservices/git-localconfig-repo
+```
 
