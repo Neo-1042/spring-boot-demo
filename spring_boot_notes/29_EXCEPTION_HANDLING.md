@@ -78,8 +78,8 @@ public class StudentRestController {
 <code>@ExceptionHandler</code> which returns a
 <code>ResponseEntity</code>.
 
-The ResponseEntity is a wrapper for the HTTP response
-object. The ResponseEntity gives you fine-grained control to
+The **ResponseEntity is a wrapper for the HTTP response
+object**. The ResponseEntity gives you fine-grained control to
 specify:
 
 - HTTP Status Code (response Line)
@@ -87,7 +87,7 @@ specify:
 - Response Body (message)
 
 In
-<code>ResponseEntity\<StudentErrorResponse\> </code> you
+<code>ResponseEntity\<StudentErrorResponse\></code> you
 specify the **type of the response body**.
 
 ```java
@@ -112,12 +112,13 @@ public class StudentRestController {
 
 ## Add Exception Handler for General BAD_REQUEST = 400
 
+
 ```java
 @RestController
 @RequestMapping("/api")
-public class StudentRestController{
-    // ...
-    // Exception handler to manage all other bad requests
+public class StudentRestController {
+    // ... Endpoints
+    // Exception Handler to manage all other bad requests:
     @ExceptionHandler
     public ResponseEntity<StudentErrorResponse> handleException(Exception exc) {
 
@@ -142,8 +143,8 @@ REST controller and cannot be reused by other controllers :c
 The Spring <code>@ControllerAdvice</code> annotation is
 similar to an interceptor/filter. 
 
-[+] Pre-process requests to controllers
-[+] Post-process responses to handle exceptions
+[+] Pre-process requests to controllers  
+[+] Post-process responses to handle exceptions  
 [+] Perfect for global exception handling
 
 This is a real-time application of

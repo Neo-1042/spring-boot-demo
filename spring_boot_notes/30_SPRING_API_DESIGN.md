@@ -10,11 +10,11 @@
 
 Email from your boss - REST clients should be able to:
 
-[+] Get a list of employees
-[+] Get a single employee by ID
-[+] Add a new employee
-[+] Update an employee
-[+] Delete an employee
+[+] Get a list of employees  
+[+] Get a single employee by ID  
+[+] Add a new employee  
+[+] Update an employee  
+[+] Delete an employee  
 
 i.e. full CRUD support.
 

@@ -216,7 +216,7 @@ flowchart LR
 # HATEOAS
 
 - Spring Data REST endpoints are HATEOS-compliant.  
-HATEOS = **Hypermedia as the Engine of Application State**
+HATEOAS = **Hypermedia as the Engine of Application State**.
 
 - Hypermedia-driven sites provide information to access
 REST interfaces --> Metadata for the REST data.

@@ -69,7 +69,7 @@ can be processed using Python, JS, Go, C#, etc.
 
 `http://localhost:8080/v3/api-docs.yaml`
 
-Of course, you customize these:
+Of course, you can customize these:
 ```properties
 springdoc.api-docs.path=/my-api-docs
 ```
@@ -85,3 +85,21 @@ in Spring Boot 4.
 
 - OpenAPI/Swagger DOES work with regular `@RestController`
 based projects.
+
+## Dev Process: Swagger UI
+
+Add Maven Dependency for Springdoc:
+
+File = (parent) pom.xml
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        <version>3.0.1</version>
+    </dependency>
+</dependencies>
+```
+
+Compile, run, and then go to: 
+`localhost:8080/swagger-ui/index.html`
