@@ -103,3 +103,10 @@ File = (parent) pom.xml
 
 Compile, run, and then go to: 
 `localhost:8080/swagger-ui/index.html`
+
+> CURL Reminder:
+```bash
+curl -X 'GET' \
+    'http://localhost:8080/api/employees' \
+    -H 'accept */*'
+```
