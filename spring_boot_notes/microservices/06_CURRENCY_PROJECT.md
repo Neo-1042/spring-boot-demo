@@ -55,3 +55,14 @@ Response Structure:
     "environment" : "8000 instance-id"
 }
 ```
+
+# Load Balancing
+
+```mermaid
+flowchart TB
+    A["Currency Conversion Microservice"] 
+        --> B["Load Balancer --> Naming Server"]
+        B --> C["Currency Exchange</br>Instance 1</br>:8000"]
+        B --> D["Currency Exchange</br>Instance 2</br>:8001"]
+        B --> E["Currency Exchange</br>Instance 3</br>:8002"]
+```
