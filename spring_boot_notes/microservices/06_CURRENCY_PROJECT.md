@@ -66,3 +66,35 @@ flowchart TB
         B --> D["Currency Exchange</br>Instance 2</br>:8001"]
         B --> E["Currency Exchange</br>Instance 3</br>:8002"]
 ```
+
+### Dynamic Port. JVM Arguments:
+
+```
+-Dserver.port=8002
+```
+
+## H2 Database (Spring Dependencies)
+
+The H2 Database provides in-memory DB that supports JDBC,
+API and R2DBC access, with a small (2 MB) footprint.
+Supports embedded and server modes, as well as a browser
+based console application.
+
+From Spring 4.x, H2 is split into -> h2 + h2Console.
+
+Add to the pom.xml: (if not already added from the Spring
+Initializr).
+
+```xml
+<dependencies>
+    <!-- -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+    </dependency>  
+</dependencies>
+```
