@@ -95,6 +95,12 @@ Initializr).
     <dependency>
         <groupId>com.h2database</groupId>
         <artifactId>h2</artifactId>
-    </dependency>  
+        <scope>runtime</scope>
+    </dependency>
+    <!--From Spring Boot 4.x on, add the h2 console separately-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-h2console</artifactId>
+    </dependency>
 </dependencies>
 ```
