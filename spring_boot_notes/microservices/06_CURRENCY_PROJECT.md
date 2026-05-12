@@ -104,3 +104,24 @@ Initializr).
     </dependency>
 </dependencies>
 ```
+
+# H2 Console Errors
+
+Be careful when adding the dependencies, as well as the
+application.properties file:
+
+```properties
+# Adding H2 DB + JPA
+spring.jpa.show-sql=true
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.h2.console.enabled=true
+```
+
+## Adding a table to the H2 Database
+
+Simply add the `@Entity` and `@Id` annotations from:
+
+```java
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+```

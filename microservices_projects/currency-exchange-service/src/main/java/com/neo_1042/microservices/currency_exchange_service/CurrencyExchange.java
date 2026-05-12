@@ -2,8 +2,13 @@ package com.neo_1042.microservices.currency_exchange_service;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class CurrencyExchange {
 
+    @Id
     private Long id;
 
     private String from;

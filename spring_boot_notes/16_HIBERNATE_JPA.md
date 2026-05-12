@@ -6,7 +6,7 @@ database.
 
 [https://hibernate.org](https://hibernate.org)
 
-JAVA APP <-> HIBERNATE <-> SQL DB
+JAVA APP <---> HIBERNATE <---> SQL DB
 
 Hibernate has the following advantages:
 
@@ -53,8 +53,8 @@ Student theStudent = new Student("Paul", "Doe", "paul@gmail.com");
 // The EntityManager is a special JPA helper object
 entityManager.persist(theStudent);
 
-// JPA will take the Java object, translate it into SQL 
-// code, and then INSERT it into the corresponding table.
+// JPA will take the Java object, translate it into SQL code
+// and then INSERT it into the corresponding table.
 
 // Retrieve the recently created object from the DB
 int desiredId = 100;
@@ -77,5 +77,15 @@ List<Student> listStudents = theQuery.getResultList();
 ## Bonus: How does Hibernate and JPA relate to JDBC?
 
 Hibernate JPA actually uses JDBC for all database
-communications. Therefore, Hibernate is actually an extra
-abstraction layer.
+communications. Therefore, Hibernate is actually "just" an
+extra abstraction layer.
+
+# JPA and Hibernate (from Udemy 'in28Minutes')
+
+1. Create a Spring Boot Project with a H2 Database.
+2. Create `tbl_course`.
+3. Use Spring JDBC to play with the `tbl_course`.
+4. Use **JPA and Hibernate** to play with the `tbl_course`.
+
+## The World Before JPA: JDBC
+
