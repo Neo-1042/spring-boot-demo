@@ -87,5 +87,65 @@ extra abstraction layer.
 3. Use Spring JDBC to play with the `tbl_course`.
 4. Use **JPA and Hibernate** to play with the `tbl_course`.
 
+# H2 Console Errors
+
+Add both the H2 dependencies, as well as the
+application.properties file:
+
+```properties
+# Adding H2 DB + JPA
+spring.jpa.show-sql=true
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.h2.console.enabled=true
+```
+
+> Add a src/main/resources/schema.sql file:
+```sql
+CREATE TABLE course
+(
+    id BIGINT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+```
+Spring Boot will automatically run this SQL script on the
+H2 database.
+
 ## The World Before JPA: JDBC
+
+JDBC = Java Database Connectivity
+
+The difference between (bare) JDBC vs Spring JDBC is that
+with Spring JDBC you have to write less Java code.
+
+### JDBC Example
+
+```java
+public void deleteTodo(int id) {
+
+    PreparedStatement st = null;
+
+    try {
+        st = db.conn.prepareStatement("DELETE FROM todo WHERE id=?");
+        st.setInt(1, id);
+        st.execute();
+    } catch (SQLException exc) {
+        logger.fatal("Query failed : " exc);
+    } finally {
+        if (st != null) {
+            try { st.close(); }
+            catch (SQLException exc) {}
+        }
+    }
+}
+```
+
+### Spring JDBC (Same example)
+
+```java
+public void deleteTodo(int id) {
+    jdbcTemplate.update("DELETE FROM todo where id=?", id);
+}
+```
 
