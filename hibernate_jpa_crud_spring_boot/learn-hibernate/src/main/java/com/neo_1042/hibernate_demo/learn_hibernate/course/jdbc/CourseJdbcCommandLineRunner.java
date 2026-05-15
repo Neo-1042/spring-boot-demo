@@ -16,5 +16,8 @@ public class CourseJdbcCommandLineRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         
         repository.insert(new Course(1L, "Learn AWS NOW", "in28Minutes"));
+        repository.insert(new Course(2L, "React", "in28Minutes"));
+        repository.insert(new Course(3L, "Mainframe", "in28Minutes"));
+        repository.insert(new Course(4L, "Spring Security", "in28Minutes"));
     }
 }
