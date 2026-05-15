@@ -125,3 +125,89 @@ Simply add the `@Entity` and `@Id` annotations from:
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 ```
+
+## 1. Add a CurrencyExchange Entity:
+
+File = CurrencyExchange.java
+```java
+@Entity
+public class CurrencyExchange {
+
+    @Id
+    private Long id;
+
+    @Column(name="currency_from")
+    private String from;
+
+    @Column(name = "currency_to")
+    private String to;
+
+    private BigDecimal conversionMultiple;
+
+    private String environment;
+
+    // Constructors, getters and setters...
+}
+```
+
+## 2. Add data to your H2 DB
+
+File = src/main/resources/data.sql
+```sql
+INSERT INTO CURRENCY_EXCHANGE(id, currency_from, currency_to, conversion_multiple, environment)
+VALUES (10001, 'USD', 'INR', 65, '');
+INSERT INTO CURRENCY_EXCHANGE(id, currency_from, currency_to, conversion_multiple, environment)
+VALUES (10002, 'EUR', 'INR', 75, '');
+INSERT INTO CURRENCY_EXCHANGE(id, currency_from, currency_to, conversion_multiple, environment)
+VALUES (10003, 'AUD', 'INR', 25, '');
+
+COMMIT;
+```
+
+## 3. Add a Repository that extends JpaRepository
+
+File = CurrencyExchangeRepository.java
+```java
+public interface CurrencyExchangeRepository 
+    extends JpaRepository<CurrencyExchange, Long> {
+    
+    // Spring Data JPA will convert this to a SQL query
+    CurrencyExchange findByFromAndTo(String from, String to);
+}
+```
+
+## 4. Call this from the Controller
+
+File = CurrencyExchangeController.java
+
+```java
+@RestController
+public class CurrencyExchangeController {
+
+    // Choose: org.springfamework.core.env.Environment;
+    @Autowired
+    private Environment env;
+
+    @Autowired
+    private CurrencyExchangeRepository repository;
+
+    @GetMapping("/currency-exchange/from/{from}/to/{to}")
+    public CurrencyExchange retrieveExchangeValue(
+            @PathVariable String from,
+            @PathVariable String to) {
+
+        // This did not need an implementation :O
+        CurrencyExchange currencyExchange = repository.findByFromAndTo(from, to);
+
+        if(currencyExchange == null) {
+            throw new RuntimeException("Unable to find data for: from = " + from + ", to = " + to);
+        }
+
+        String port = env.getProperty("local.server.port");
+
+        currencyExchange.setEnvironment(port);
+
+        return currencyExchange;
+    }
+}
+```
