@@ -1,8 +1,5 @@
 package com.neo_1042.microservices.currency_exchange_service.controller;
 
-import java.math.BigDecimal;
-import java.util.Currency;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;

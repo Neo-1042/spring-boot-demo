@@ -229,3 +229,9 @@ Response Structure:
   "environment": "8000 instance-id"
 }
 ```
+
+### Use RestTemplate to make REST calls
+
+```java
+import org.springframework.web.client.RestTemplate;
+```
