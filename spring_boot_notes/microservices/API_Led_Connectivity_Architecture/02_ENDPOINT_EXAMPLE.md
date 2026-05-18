@@ -98,4 +98,9 @@ public interface DPAVMapper extends BeanMapper<DPAVDto, DPAV> {
 }
 ```
 
-File = 
+File = DPAVRepository.java
+```java
+public interface DPAVRepository extends JpaRepository<DPAV, DPAVId>, JpaSpecificationExecutor<DPAV> {
+    // 
+}
+```

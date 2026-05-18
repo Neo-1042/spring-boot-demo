@@ -32,3 +32,17 @@ up and running.
 - ArtifactId = naming-server
 
 Dependencies = {Dev Tools, Actuator, Eureka Server}
+
+Add this annotation to the main app file:
+```java
+@EnableEurekaServer
+```
+
+Add this to the properties file:
+```properties
+spring.application.name=naming-server
+server.port=8761
+
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+```
