@@ -1,6 +1,6 @@
 # SAPI
 
-File = DPAVController.java
+## File = DPAVController.java
 
 ```java
 @RestController
@@ -60,7 +60,7 @@ public class DPAVController {
 }
 ```
 
-File = PageResponseDto.java
+## File = PageResponseDto.java
 ```java
 // Java generics
 public class PageResponseDto<T> {
@@ -80,7 +80,7 @@ public class PageResponseDto<T> {
 }
 ```
 
-File = DPAVMapper.java (uses MapStruct)
+## File = DPAVMapper.java (uses MapStruct)
 ```java
 @Component
 @Mapper(componentModel="spring")
@@ -98,9 +98,44 @@ public interface DPAVMapper extends BeanMapper<DPAVDto, DPAV> {
 }
 ```
 
-File = DPAVRepository.java
+## File = DPAVRepository.java (interface)
 ```java
 public interface DPAVRepository extends JpaRepository<DPAV, DPAVId>, JpaSpecificationExecutor<DPAV> {
-    // 
+    // That's it
 }
 ```
+
+## File = DPAVService.java (interface)
+```java
+public interface DPAVService extends BaseService<DPAV, DPAVDto, DPAVId, DPAVIdDto> {
+
+    PageResponseDto<DPAVDto> findAll(Pageable pageable);
+    PageResponseDto<DPAVDto> findP(FindPRequestDto requestDto, Pageable pageable);
+}
+```
+
+## File = DPAVServiceImpl.java
+```java
+@Service
+public class DPAVServiceImpl extends BaseServiceImpl<DPAV, DPAVDto, DPAVId, DPAVIdDto>
+    implements DPAVService {
+    
+    private final DPAVRepository repository;
+
+    // NOTE: this should also have a no-arg constructor:
+    public DPAVServiceImpl() {} 
+
+    public DPAVServiceImpl(
+        @Autowired DPAVRepository repository,
+        @Autowired DPAVMapper mapper,
+        @Autowired DPAVIdMapper idmapper,
+        @Value("${spring.application.capa}") String capa,
+        @Value("${spring.application.service-id}") String serviceId,
+        @Value("${spring.application.name}") String serviceName
+    )
+
+}
+```
+
+
+## File = BaseService.java

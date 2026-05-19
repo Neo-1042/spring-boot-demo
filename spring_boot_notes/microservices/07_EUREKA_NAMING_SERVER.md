@@ -46,3 +46,30 @@ server.port=8761
 eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false
 ```
+
+## Debugging Problems with Eureka:
+
+Apply these settings in each `application.properties` file of each microservice:
+
+```properties
+eureka.instance.prefer-ip-address=true
+# OR
+eureka.instance.hostname=localhost
+```
+
+# Connecting our Microservices to the Naming Server
+
+Add this dependency to each microservice's main POM file:
+File = pom.xml
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+```
+
+Plus, add the naming server URL to the properties file:  
+currency-exchange + currency-conversion:
+```properties
+eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
+```
