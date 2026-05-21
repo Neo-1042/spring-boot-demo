@@ -114,6 +114,40 @@ public interface DPAVService extends BaseService<DPAV, DPAVDto, DPAVId, DPAVIdDt
 }
 ```
 
+## File = BaseService.java
+```java
+public interface BaseService<E, D, EID, DID> {
+
+    List<D> findAll() throws IOException;
+
+    D findById(DID id) throws IOException;
+
+    D create(D dto) throws IOException;
+
+    D update(DID id, D dto) throws IOException;
+
+    void deleteById(DID id) throws IOException;
+}
+```
+
+## File = BaseServiceImpl.java
+```java
+public abstract class BaseServiceImpl<E, D, EID, DID> implements BaseService<E, D, EID, DID> {
+
+    private JpaRepository<E, EID> repository;
+
+    private BeanMapper<D, E> mapper;
+
+    private String capa;
+    private String serviceId;
+    private String serviceName;
+
+    private final BeanMapper<DID, EID> idmapper;
+
+    protected BaseServiceImpl(JpaRepository<E, EID> repository) // ...
+}
+```
+
 ## File = DPAVServiceImpl.java
 ```java
 @Service
@@ -131,11 +165,33 @@ public class DPAVServiceImpl extends BaseServiceImpl<DPAV, DPAVDto, DPAVId, DPAV
         @Autowired DPAVIdMapper idmapper,
         @Value("${spring.application.capa}") String capa,
         @Value("${spring.application.service-id}") String serviceId,
-        @Value("${spring.application.name}") String serviceName
-    )
+        @Value("${spring.application.name}") String serviceName) {
 
+        super(repository, mapper, idmapper, capa, serviceId, serviceName);
+        this.repository = repository;
+    }
+
+    public PageResponseDto<DPAVDto> findAll(Pageable pageable) {
+        Page<DPAV> resultPage = this.repository.findAll(pageable);
+        return PageMapper.toPageResponse(resultPage, super.getMapper()::toDto);
+    }
+
+    public PageResponseDto<DPAVDto> findP(FindPRequestDto requestDto, Pageable pageable) {
+        Specification<DPAV> spec = Specification.<DPAV>where(CommonSpecification.equalsIfHasText("bcode", requestDto.getBCode()))
+                .and(CommonSpecification.equalsIfHasText("hcode", requestDto.getHCode()))
+                .and(CommonSpecification.containsIfHasText("hname", requestDto.getHName()))
+                .and(DPAVSpecifications.hasPYear(requestDto.getPYear()))
+                .and(CommonSpecification.notEqualsIfHasText("status", StatusCodes.DELETED));
+        
+        Page<DPAV> resultPage = this.repository.findAll(spec, pageable);
+        return PageMapper.toPageResponse(resultPage, super.getMapper()::toDto);
+    }
 }
 ```
 
+# PAPI = Process API Layer
 
-## File = BaseService.java
+File = 
+```java
+
+```
