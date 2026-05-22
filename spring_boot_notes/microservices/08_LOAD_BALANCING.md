@@ -58,3 +58,12 @@ Package Name = com.neo_1042.microservices.api-gateway
 
 Dependencies = {Actuator, Dev Tools, Eureka Discovery Client,
 **Reactive Gateway**}
+
+> IMPORTANT: don't forget to add this load balancer dependency
+to the api-gateway's pom.xml file:
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+</dependency>
+```
