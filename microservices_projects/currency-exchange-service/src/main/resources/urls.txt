@@ -4,6 +4,9 @@ http://localhost:8761/eureka/apps
 API GATEWAY
 http://localhost:8765/
 http://localhost:8765/CURRENCY-EXCHANGE/currency-exchange/from/USD/to/INR
+http://localhost:8765/currency-exchange/currency-exchange/from/USD/to/INR
+http://localhost:8765/CURRENCY-CONVERSION/currency-conversion/from/USD/to/INR/quantity/10
+http://localhost:8765/CURRENCY-CONVERSION/currency-conversion-feign/from/USD/to/INR/quantity/10
 
 CURRENCY EXCHANGE SERVICE
 http://localhost:8000/currency-exchange/from/USD/to/INR

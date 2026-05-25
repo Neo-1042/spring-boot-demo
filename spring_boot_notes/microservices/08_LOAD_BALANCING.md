@@ -67,3 +67,24 @@ to the api-gateway's pom.xml file:
     <artifactId>spring-cloud-starter-loadbalancer</artifactId>
 </dependency>
 ```
+
+> Debugging Guide URL = https://github.com/in28minutes/spring-microservices-v3/blob/main/03.microservices/01-step-by-step-changes/readme.md#spring-cloud-api-gateway---step-22-to-step-25
+
+- Enable wiretap to see more details (api-gateway):
+```properties
+spring.cloud.gateway.httpserver.wiretap=true
+spring.cloud.gateway.httpclient.wiretap=true
+```
+
+TO DO:
+
+```properties
+# 1. Give the route an ID
+spring.cloud.gateway.routes[0].id=currency-exchange-route
+
+# 2. Tell it to load-balance (lb) using the Eureka service name
+spring.cloud.gateway.routes[0].uri=lb://CURRENCY-EXCHANGE
+
+# 3. Define the path pattern the Gateway should intercept
+spring.cloud.gateway.routes[0].predicates[0]=Path=/currency-exchange/**
+```
