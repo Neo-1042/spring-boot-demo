@@ -88,3 +88,29 @@ spring.cloud.gateway.routes[0].uri=lb://CURRENCY-EXCHANGE
 # 3. Define the path pattern the Gateway should intercept
 spring.cloud.gateway.routes[0].predicates[0]=Path=/currency-exchange/**
 ```
+
+# Custom Routes with an ApiGatewayConfiguration File
+
+File = ApiGatewayConfiguration
+```java
+package com.neo_1042.microservices.api_gateway;
+// Imports ...
+
+@Configuration
+public class ApiGatewayConfiguration {
+
+    @Bean
+    public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
+
+        Function<PredicateSpec, Buildable<Route>> routeFunction
+            = p -> p.path("/get")
+                    .filters(f -> f.addRequestHeader("My Header", "MyURI"))
+                    .uri("http://httpbin.org:80");
+        return builder.routes()
+            .route(routeFunction)
+            .build();
+    }
+}
+```
+
+Call this with: `localhost:8765/get`
