@@ -76,9 +76,14 @@ spring.cloud.gateway.httpserver.wiretap=true
 spring.cloud.gateway.httpclient.wiretap=true
 ```
 
-TO DO:
+Try adding this to the `application.properties` file if you
+are having problems:
 
 ```properties
+spring.application.name=api-gateway
+server.port=8765
+eureka.client.serviceUrl.defaultZone=http://localhost:8761/
+
 # 1. Give the route an ID
 spring.cloud.gateway.routes[0].id=currency-exchange-route
 
@@ -88,6 +93,10 @@ spring.cloud.gateway.routes[0].uri=lb://CURRENCY-EXCHANGE
 # 3. Define the path pattern the Gateway should intercept
 spring.cloud.gateway.routes[0].predicates[0]=Path=/currency-exchange/**
 ```
+
+Reminder: most important Spring Boot dependency for an API
+Gateway:  
+`Reactive Gateway` (from Spring Cloud Routing)
 
 # Custom Routes with an ApiGatewayConfiguration File
 
