@@ -115,6 +115,12 @@ spring.cloud.gateway.discovery.locator.lower-case-service-id=true
 
 # Custom Routes with an ApiGatewayConfiguration File
 
+This API Gateway Configurator should override the "Enable eureka discovery"
+property:
+```properties
+# spring.cloud.gateway.discovery.locator.enabled=true
+```
+
 File = ApiGatewayConfiguration.java
 ```java
 package com.neo_1042.microservices.api_gateway;
@@ -146,4 +152,38 @@ public class ApiGatewayConfiguration {
 }
 ```
 
-Call this with: `localhost:8765/get`
+Connecting with the custom API routing configuration instead of using Eureka:
+```java
+
+@Configuration
+public class ApiGatewayConfiguration {
+
+    @Bean
+    public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
+
+        return builder.routes()
+            .route(p -> p.path("/get")
+                    .filters(f -> f
+                        .addRequestHeader("My Header", "MyURI")
+                        .addRequestParameter("Param", "My Value")
+                    )
+                    .uri("http://httpbin.org:80")
+            )
+            .route(p -> p.path("/currency-exchange/**")
+                        .uri("lb://currency-exchange"))
+            .route(p -> p.path("/currency-conversion/**")
+                        .uri("lb://currency-conversion"))
+            .route(p -> p.path("/currency-conversion-feign/**")
+                        .uri("lb://currency-conversion-feign"))
+            .route(p -> p.path("/currency-conversion-new/**")
+                        .filters(f -> f.rewritePath(
+                            "/currency-conversion-new/(?<segment>.*)",
+                            "/currency-conversion-feign/${segment}"
+                        ))
+                        .uri("lb://currency-conversion-feign"))
+            .build();
+            
+    }
+}
+```
+
