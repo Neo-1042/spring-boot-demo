@@ -96,11 +96,26 @@ spring.cloud.gateway.routes[0].predicates[0]=Path=/currency-exchange/**
 
 Reminder: most important Spring Boot dependency for an API
 Gateway:  
-`Reactive Gateway` (from Spring Cloud Routing)
+`Reactive Gateway` (from Spring Cloud Routing).
+
+When receiving a request, it will first fo through
+the API Gateway, which will talk to the Eureka Server
+and ask for the port with which the requested service
+was allocated.
+
+To enable this feature, add:
+```properties
+# Sometimes you will have problems because of ip-address/server
+# naming resolving issues.
+spring.cloud.gateway.discovery.locator.enabled=true
+# Try both of this, see which one works:
+spring.cloud.gateway.discovery.locator.lowerCaseServiceId=true
+spring.cloud.gateway.discovery.locator.lower-case-service-id=true
+```
 
 # Custom Routes with an ApiGatewayConfiguration File
 
-File = ApiGatewayConfiguration
+File = ApiGatewayConfiguration.java
 ```java
 package com.neo_1042.microservices.api_gateway;
 // Imports ...
@@ -111,10 +126,19 @@ public class ApiGatewayConfiguration {
     @Bean
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
 
+        // If you hit the API Gateway (localhost:8765/get), you will be redirected to that specified uri
+        // with those custom request headers and request parameters.
         Function<PredicateSpec, Buildable<Route>> routeFunction
             = p -> p.path("/get")
-                    .filters(f -> f.addRequestHeader("My Header", "MyURI"))
+                    .filters(f -> f
+                        .addRequestHeader("My Header", "MyURI")
+                        .addRequestParameter("Custom Param", "Hello, World")
+                    )
                     .uri("http://httpbin.org:80");
+
+        // If you don't customize the route, then use:
+        // return builder.routes().build();
+        // If you need a custom route, use:
         return builder.routes()
             .route(routeFunction)
             .build();
