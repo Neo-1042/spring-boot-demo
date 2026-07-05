@@ -215,3 +215,46 @@ public class LoggingFilter implements GlobalFilter {
     }
 }
 ```
+
+# Circuit Breaker - Resilience4j
+
+Resilience4j is a lightweigth fault tolerance library.
+
+Say you have a chain of microservices that are dependendent of the
+next. What if one of the services is down or slow?
+
+M1 --> M2 --> M3 --> M4 --> M5 --> M6
+
+We'd have an impact on the entire chain!
+
+1. Can we return a fallback response if a service is down?
+2. Can we implement a **Circuit Breaker pattern** to reduce load?
+3. Can we retry requests in case of temporary failures?
+4. Can we implement rate limiting? (i.e. only a especific number
+of calls to a microservice in a determined amount of time).
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>io.github.resilience4j</groupId>
+        <artifactId>resilience4j-spring-boot2</artifactId>
+    </dependency>
+</dependencies>
+```
+
+File = CircuitBreakerController.java
+
+```java
+@RestController
+public class CircuitBreakerController {
+
+    @GetMapping("/sample-api")
+    public String sampleApi() {
+        return "SampleAPI";
+    }
+}
+```
