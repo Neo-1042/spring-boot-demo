@@ -248,13 +248,31 @@ of calls to a microservice in a determined amount of time).
 
 File = CircuitBreakerController.java
 
+## @Retry
+
 ```java
+import io.github.resilience4j.retry.annotation.Retry;
+
 @RestController
 public class CircuitBreakerController {
 
     @GetMapping("/sample-api")
+    @Retry(name = "default")
     public String sampleApi() {
-        return "SampleAPI";
+        
+        // This will fail
+        ResponseEntity<String> forEntity = new RestTemplate().getForEntity("http://localhost:8080/not-existent", String.class);
+
+        return forEntity.getBody();
     }
 }
 ```
+
+UPDATE:
+```properties
+# OLD
+# resilience4j.retry.instances.sample-api.maxRetryAttempts=5
+# NEW
+resilience4j.retry.instances.sample-api.maxAttempts=5
+```
+
