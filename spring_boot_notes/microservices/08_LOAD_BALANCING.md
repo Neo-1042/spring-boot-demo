@@ -256,14 +256,23 @@ import io.github.resilience4j.retry.annotation.Retry;
 @RestController
 public class CircuitBreakerController {
 
+    private Logger logger = LoggerFactory.getLogger(CircuitBreakerController.class);
+
     @GetMapping("/sample-api")
-    @Retry(name = "default")
+    @Retry(name = "sample-api", fallbackMethod = "hardcodedResponse")
     public String sampleApi() {
         
-        // This will fail
+        logger.info("Sample API call receivedv ");
         ResponseEntity<String> forEntity = new RestTemplate().getForEntity("http://localhost:8080/not-existent", String.class);
 
         return forEntity.getBody();
+    }
+
+    // Exception extends Throwable
+    // You can code for different kinds of exceptions. For now, just have this generic exception:
+    public String hardcodedResponse(Exception ex) {
+
+        return "Fallback response";
     }
 }
 ```
