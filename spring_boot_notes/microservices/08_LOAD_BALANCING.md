@@ -216,7 +216,7 @@ public class LoggingFilter implements GlobalFilter {
 }
 ```
 
-# Circuit Breaker - Resilience4j
+# Circuit Breaker Framework - Resilience4j
 
 Resilience4j is a lightweigth fault tolerance library.
 
@@ -277,11 +277,50 @@ public class CircuitBreakerController {
 }
 ```
 
+## Configuring the @Retry mechanism
+
+File = currency-exchange-service/src/main/resources/application.properties
+
 UPDATE:
 ```properties
 # OLD
 # resilience4j.retry.instances.sample-api.maxRetryAttempts=5
 # NEW
 resilience4j.retry.instances.sample-api.maxAttempts=5
+resilience4j.retry.instances.sample-api.waitDuration=1s
+resilience4j.retry.instances.sample-api.enableExponentialBackoff=true
 ```
 
+**Exponential Backoff** ---> Means that each retry will take a bit longer
+
+## Circuit Breaker Example
+
+```java
+@RestController
+public class CircuitBreakerController {
+
+    private Logger logger = LoggerFactory.getLogger(CircuitBreakerController.class);
+
+    @GetMapping("/sample-api")
+    // @Retry(name = "sample-api", fallbackMethod = "hardcodedResponse")
+    @CircuitBreaker(name = "sample-api", fallbackMethod = "hardcodedResponse")
+    public String sampleApi() {
+
+        logger.info();
+
+        ResponseEntity<String> forEntity = new RestTemplate().getForEntity("http://localhost:8080/not-existent", String.class);
+
+        return forEntity.getBody();
+    }
+
+    public String hardcodedResponse(Exception ex) {
+
+        return "Fallback Response";
+    }
+}
+```
+
+```bash
+# Send a request every 0.1 seconds
+watch -n 0.1 curl http://localhost:8000/sample-api
+```
