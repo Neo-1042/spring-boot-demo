@@ -324,3 +324,29 @@ public class CircuitBreakerController {
 # Send a request every 0.1 seconds
 watch -n 0.1 curl http://localhost:8000/sample-api
 ```
+
+## resilience4j-circuitbreaker
+
+The CircuitBreaker is implemented via a finite state
+machine (??) with three normal states:
+1. CLOSED --> Send requests to the microservice.
+2. OPEN --> Return fallback response.
+3. HALF_OPEN --> Send a fraction of the request to the
+dependent microservice.
+
+and two special states:
+
+4. DISABLED
+5. FORCED_OPEN
+
+The CircuitBreaker uses a **sliding window** to store and
+aggregate the outcome of calls. You can choose between
+a count-based sliding window and a time-based sliding window.
+The count-based sliding window aggregates the outcome of the
+last N calls. The time-based sliding window aggregates
+the outcome of the calls of the last N seconds.
+
+```properties
+# Only if 90% of the requests fail, switch to OPEN state:
+resilience4j.circuitbreaker.instances.default.failureRateThreshold=90
+```
