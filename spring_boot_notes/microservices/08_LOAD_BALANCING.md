@@ -350,3 +350,39 @@ the outcome of the calls of the last N seconds.
 # Only if 90% of the requests fail, switch to OPEN state:
 resilience4j.circuitbreaker.instances.default.failureRateThreshold=90
 ```
+
+## @RateLimiter
+
+Rate Limiting is settings limits on the number of calls in
+a specifi amount of time, for example:  
+> A maximum of 10'000 calls to the API in 10 seconds.
+
+```properties
+resilience4j.ratelimiter.instances.default.limitForPeriod=10000
+resilience4j.ratelimiter.instances.default.limitRefreshPeriod=10s
+# BULKHEAD
+resilience4j.bulkhead.instances.default.maxConcurrentCalls=10
+```
+
+```java
+@RestController
+public class CircuitBreakerController {
+
+    private Logger logger = LoggerFactory.getLogger(CircuitBreakerController.class);
+
+    @GetMapping("/sample-api")
+    @RateLimiter(name="default")
+    // @Bulkhead(name="default")
+    public String sampleApi() {
+
+        logger.info("Sample api call received");
+
+        return "Sample-API";
+    }
+
+    public String hardcodedResponse(Exception ex) {
+        
+        return "Fallback Response";
+    }
+}
+```
